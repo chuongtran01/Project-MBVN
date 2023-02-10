@@ -7,7 +7,8 @@ namespace HospitalManagementSystem.Models
     {
         public Patient()
         {
-            Beds = new HashSet<Bed>();
+            Appointments = new HashSet<Appointment>();
+            MedicalHistories = new HashSet<MedicalHistory>();
             Prescriptions = new HashSet<Prescription>();
         }
 
@@ -16,8 +17,6 @@ namespace HospitalManagementSystem.Models
         public string? Lastname { get; set; }
         public string? Midname { get; set; }
         public string? Address { get; set; }
-        public double? Weight { get; set; }
-        public double? Height { get; set; }
         public DateTime? Birthday { get; set; }
         public string? Gender { get; set; }
         public string? EmailAddress { get; set; }
@@ -28,7 +27,8 @@ namespace HospitalManagementSystem.Models
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastVisited { get; set; }
 
-        public virtual ICollection<Bed> Beds { get; set; }
+        public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual ICollection<MedicalHistory> MedicalHistories { get; set; }
         public virtual ICollection<Prescription> Prescriptions { get; set; }
     }
 }

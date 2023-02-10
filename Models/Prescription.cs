@@ -15,7 +15,7 @@ namespace HospitalManagementSystem.Models
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
 
-        public virtual Staff? Doctor { get; set; }
+        public virtual Doctor? Doctor { get; set; }
         public virtual Medicine? Medicine { get; set; }
         public virtual Patient? Patient { get; set; }
     }

@@ -16,15 +16,20 @@ namespace HospitalManagementSystem.Models
         {
         }
 
-        public virtual DbSet<Bed> Beds { get; set; } = null!;
+        public virtual DbSet<Admin> Admins { get; set; } = null!;
+        public virtual DbSet<Appointment> Appointments { get; set; } = null!;
+        public virtual DbSet<ContactU> ContactUs { get; set; } = null!;
         public virtual DbSet<Department> Departments { get; set; } = null!;
+        public virtual DbSet<Doctor> Doctors { get; set; } = null!;
+        public virtual DbSet<DoctorsLog> DoctorsLogs { get; set; } = null!;
         public virtual DbSet<Hospital> Hospitals { get; set; } = null!;
+        public virtual DbSet<MedicalHistory> MedicalHistories { get; set; } = null!;
         public virtual DbSet<Medicine> Medicines { get; set; } = null!;
+        public virtual DbSet<Nurse> Nurses { get; set; } = null!;
+        public virtual DbSet<Page> Pages { get; set; } = null!;
         public virtual DbSet<Patient> Patients { get; set; } = null!;
         public virtual DbSet<Prescription> Prescriptions { get; set; } = null!;
-        public virtual DbSet<Role> Roles { get; set; } = null!;
-        public virtual DbSet<Room> Rooms { get; set; } = null!;
-        public virtual DbSet<Staff> Staffs { get; set; } = null!;
+        public virtual DbSet<UserLog> UserLogs { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,50 +42,155 @@ namespace HospitalManagementSystem.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Bed>(entity =>
+            modelBuilder.Entity<Admin>(entity =>
             {
-                entity.Property(e => e.BedId).HasColumnName("BedID");
+                entity.Property(e => e.AdminId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("AdminID");
 
-                entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
+                entity.Property(e => e.Birthday).HasColumnType("date");
 
-                entity.Property(e => e.IsAvai).HasColumnName("isAvai");
+                entity.Property(e => e.Email).HasMaxLength(50);
 
-                entity.Property(e => e.Location).HasMaxLength(50);
+                entity.Property(e => e.Gender).HasMaxLength(50);
 
-                entity.Property(e => e.NurseId).HasColumnName("NurseID");
+                entity.Property(e => e.Name).HasMaxLength(50);
 
-                entity.Property(e => e.PatientId).HasColumnName("PatientID");
+                entity.Property(e => e.Password).HasMaxLength(50);
 
-                entity.Property(e => e.RoomId).HasColumnName("RoomID");
+                entity.Property(e => e.PhoneNumber).HasMaxLength(50);
+
+                entity.Property(e => e.Username).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Appointment>(entity =>
+            {
+                entity.Property(e => e.AppointmentId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("AppointmentID");
+
+                entity.Property(e => e.AppointmentDate)
+                    .HasMaxLength(50)
+                    .HasColumnName("appointmentDate");
+
+                entity.Property(e => e.AppontmentTime)
+                    .HasMaxLength(50)
+                    .HasColumnName("appontmentTime");
+
+                entity.Property(e => e.DoctorId).HasColumnName("doctorID");
+
+                entity.Property(e => e.DoctorSpecilization).HasColumnName("doctorSpecilization");
+
+                entity.Property(e => e.DoctorStatus).HasColumnName("doctorStatus");
+
+                entity.Property(e => e.Fees).HasColumnName("fees");
+
+                entity.Property(e => e.PatientId).HasColumnName("patientID");
+
+                entity.Property(e => e.PatientStatus).HasColumnName("patientStatus");
+
+                entity.Property(e => e.PostingDate)
+                    .IsRowVersion()
+                    .IsConcurrencyToken()
+                    .HasColumnName("postingDate");
 
                 entity.HasOne(d => d.Doctor)
-                    .WithMany(p => p.BedDoctors)
+                    .WithMany(p => p.Appointments)
                     .HasForeignKey(d => d.DoctorId)
-                    .HasConstraintName("FK_Beds_DoctorID");
-
-                entity.HasOne(d => d.Nurse)
-                    .WithMany(p => p.BedNurses)
-                    .HasForeignKey(d => d.NurseId)
-                    .HasConstraintName("FK_Beds_NurseID");
+                    .HasConstraintName("FK_Appointments_Doctors");
 
                 entity.HasOne(d => d.Patient)
-                    .WithMany(p => p.Beds)
+                    .WithMany(p => p.Appointments)
                     .HasForeignKey(d => d.PatientId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Beds_PatientID");
+                    .HasConstraintName("FK_Appointments_PatientID");
+            });
 
-                entity.HasOne(d => d.Room)
-                    .WithMany(p => p.Beds)
-                    .HasForeignKey(d => d.RoomId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Beds_RoomID");
+            modelBuilder.Entity<ContactU>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.Contactno)
+                    .HasMaxLength(50)
+                    .HasColumnName("contactno");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .HasColumnName("email");
+
+                entity.Property(e => e.Fullname)
+                    .HasMaxLength(50)
+                    .HasColumnName("fullname");
+
+                entity.Property(e => e.LastUpdation)
+                    .HasColumnType("datetime")
+                    .HasColumnName("lastUpdation");
+
+                entity.Property(e => e.Message).HasColumnName("message");
+
+                entity.Property(e => e.PostingDate)
+                    .IsRowVersion()
+                    .IsConcurrencyToken()
+                    .HasColumnName("postingDate");
             });
 
             modelBuilder.Entity<Department>(entity =>
             {
                 entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
 
+                entity.Property(e => e.CreationDate).HasColumnType("date");
+
                 entity.Property(e => e.Location).HasMaxLength(50);
+
+                entity.Property(e => e.UpdationDate).HasColumnType("date");
+            });
+
+            modelBuilder.Entity<Doctor>(entity =>
+            {
+                entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
+
+                entity.Property(e => e.Birthday).HasColumnType("date");
+
+                entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
+
+                entity.Property(e => e.EmailAddress).HasMaxLength(50);
+
+                entity.Property(e => e.Field).HasMaxLength(50);
+
+                entity.Property(e => e.Gender).HasMaxLength(50);
+
+                entity.Property(e => e.Name).HasMaxLength(50);
+
+                entity.Property(e => e.Password).HasMaxLength(50);
+
+                entity.Property(e => e.PhoneNumber).HasMaxLength(50);
+
+                entity.HasOne(d => d.Department)
+                    .WithMany(p => p.Doctors)
+                    .HasForeignKey(d => d.DepartmentId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_Staffs_DepartmentID");
+            });
+
+            modelBuilder.Entity<DoctorsLog>(entity =>
+            {
+                entity.ToTable("DoctorsLog");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.LoginTime)
+                    .IsRowVersion()
+                    .IsConcurrencyToken()
+                    .HasColumnName("loginTime");
+
+                entity.Property(e => e.Status).HasColumnName("status");
+
+                entity.Property(e => e.Uid).HasColumnName("UID");
+
+                entity.Property(e => e.Username).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Hospital>(entity =>
@@ -94,6 +204,26 @@ namespace HospitalManagementSystem.Models
                 entity.Property(e => e.Telephone).HasMaxLength(50);
             });
 
+            modelBuilder.Entity<MedicalHistory>(entity =>
+            {
+                entity.ToTable("MedicalHistory");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.CreationDate)
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.Property(e => e.PatientId).HasColumnName("PatientID");
+
+                entity.HasOne(d => d.Patient)
+                    .WithMany(p => p.MedicalHistories)
+                    .HasForeignKey(d => d.PatientId)
+                    .HasConstraintName("FK_MedicalHistory_Patients");
+            });
+
             modelBuilder.Entity<Medicine>(entity =>
             {
                 entity.ToTable("Medicine");
@@ -101,6 +231,44 @@ namespace HospitalManagementSystem.Models
                 entity.Property(e => e.MedicineId).HasColumnName("MedicineID");
 
                 entity.Property(e => e.Name).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Nurse>(entity =>
+            {
+                entity.Property(e => e.NurseId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("NurseID");
+
+                entity.Property(e => e.Birthday).HasColumnType("date");
+
+                entity.Property(e => e.Email).HasMaxLength(50);
+
+                entity.Property(e => e.Gender).HasMaxLength(50);
+
+                entity.Property(e => e.Name).HasMaxLength(50);
+
+                entity.Property(e => e.Password).HasMaxLength(50);
+
+                entity.Property(e => e.PhoneNumbner).HasMaxLength(50);
+
+                entity.Property(e => e.Username).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Page>(entity =>
+            {
+                entity.Property(e => e.PageId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("PageID");
+
+                entity.Property(e => e.Email).HasMaxLength(50);
+
+                entity.Property(e => e.MobileNumber).HasMaxLength(50);
+
+                entity.Property(e => e.OpenningTime).HasMaxLength(50);
+
+                entity.Property(e => e.UpdationDate)
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
             });
 
             modelBuilder.Entity<Patient>(entity =>
@@ -169,61 +337,26 @@ namespace HospitalManagementSystem.Models
                     .HasConstraintName("FK_Prescriptions_PatientID");
             });
 
-            modelBuilder.Entity<Role>(entity =>
+            modelBuilder.Entity<UserLog>(entity =>
             {
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
+                entity.ToTable("UserLog");
 
-                entity.Property(e => e.Description).HasMaxLength(50);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
 
-                entity.Property(e => e.RoleName).HasMaxLength(50);
-            });
+                entity.Property(e => e.LoginTime)
+                    .IsRowVersion()
+                    .IsConcurrencyToken()
+                    .HasColumnName("loginTime");
 
-            modelBuilder.Entity<Room>(entity =>
-            {
-                entity.Property(e => e.RoomId).HasColumnName("RoomID");
+                entity.Property(e => e.Status).HasColumnName("status");
 
-                entity.Property(e => e.IsAvailable).HasColumnName("isAvailable");
+                entity.Property(e => e.Uid).HasColumnName("UID");
 
-                entity.Property(e => e.Location).HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<Staff>(entity =>
-            {
-                entity.Property(e => e.StaffId).HasColumnName("StaffID");
-
-                entity.Property(e => e.Birthday).HasColumnType("date");
-
-                entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
-
-                entity.Property(e => e.EmailAddress).HasMaxLength(50);
-
-                entity.Property(e => e.Field).HasMaxLength(50);
-
-                entity.Property(e => e.Firstname).HasMaxLength(50);
-
-                entity.Property(e => e.Gender).HasMaxLength(50);
-
-                entity.Property(e => e.Lastname).HasMaxLength(50);
-
-                entity.Property(e => e.Midname).HasMaxLength(50);
-
-                entity.Property(e => e.Password).HasMaxLength(50);
-
-                entity.Property(e => e.PhoneNumber).HasMaxLength(50);
-
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
-
-                entity.HasOne(d => d.Department)
-                    .WithMany(p => p.staff)
-                    .HasForeignKey(d => d.DepartmentId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Staffs_DepartmentID");
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.staff)
-                    .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Staffs_RoleID");
+                entity.Property(e => e.Username)
+                    .HasMaxLength(50)
+                    .HasColumnName("username");
             });
 
             OnModelCreatingPartial(modelBuilder);
