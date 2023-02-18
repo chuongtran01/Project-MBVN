@@ -1,9 +1,87 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Hospital management System </title>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <link rel="shortcut icon" href="Assets/images/fav.jpg">
+    <link rel="stylesheet" href="Assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Assets/css/fontawsom-all.min.css">
+    <link rel="stylesheet" href="Assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="Assets/css/style.css" />
+</head>
 
+<section id="logins" class="our-blog container-fluid">
+    <div class="container">
+        <div class="inner-title">
+
+            <h2>Logins</h2>
+        </div>
+        <div class="col-sm-12 blog-cont">
+            <div class="row no-margin">
+                <div class="col-sm-4 blog-smk">
+                    <div class="blog-single">
+
+                        <img src="/Assets/images/patient.jpg" alt="">
+
+                        <div class="blog-single-det">
+                            <h6>Patient Login</h6>
+                            <a class="btn btn-success btn-sm" asp-area="" asp-controller="Account" asp-action="Login">
+                                Click Here
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 blog-smk">
+                    <div class="blog-single">
+
+                        <img src="/Assets/images/doctor.jpg" alt="">
+
+                        <div class="blog-single-det">
+                            <h6>Doctors login</h6>
+                            <a class="btn btn-success btn-sm" asp-area="" asp-controller="Account" asp-action="Login">
+                                Click Here
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 blog-smk">
+                    <div class="blog-single">
+
+                        <img src="/Assets/images/admin.jpg" alt="">
+
+                        <div class="blog-single-det">
+                            <h6>Admin Login</h6>
+
+                            <a class="btn btn-success btn-sm" asp-area="" asp-controller="Account" asp-action="Login">
+                                Click Here
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<script src="Assets/js/jquery-3.2.1.min.js"></script>
+<script src="Assets/js/popper.min.js"></script>
+<script src="Assets/js/bootstrap.min.js"></script>
+<script src="Assets/plugins/scroll-nav/js/jquery.easing.min.js"></script>
+<script src="Assets/plugins/scroll-nav/js/scrolling-nav.js"></script>
+<script src="Assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+
+<script src="Assets/js/script.js"></script>
+</html>

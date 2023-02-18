@@ -35,6 +35,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/chuongtran/Desktop/Projects/MBVN/HospitalManagementSystem/EmailTemplate/ResetPasswordEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RW1haWxUZW1wbGF0ZS9SZXNldFBhc3N3b3JkRW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/chuongtran/Desktop/Projects/MBVN/HospitalManagementSystem/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -49,6 +53,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/chuongtran/Desktop/Projects/MBVN/HospitalManagementSystem/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/chuongtran/Desktop/Projects/MBVN/HospitalManagementSystem/Views/Login/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9naW4vRm9yZ290UGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/chuongtran/Desktop/Projects/MBVN/HospitalManagementSystem/Views/Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9naW4vSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/chuongtran/Desktop/Projects/MBVN/HospitalManagementSystem/Views/Login/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9naW4vUmVzZXRQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/chuongtran/Desktop/Projects/MBVN/HospitalManagementSystem/Views/Shared/Error.cshtml]
