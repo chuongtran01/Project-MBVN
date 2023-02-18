@@ -11,7 +11,7 @@
     "HospitalManagementSystem": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:1625",
+      "applicationUrl": "http://localhost:5325",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

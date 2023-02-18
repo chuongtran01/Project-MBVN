@@ -23,6 +23,11 @@
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="PagedList.Core.Mvc" />
     <None Remove="AspNetCoreHero.ToastNotification" />
+    <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+    <None Remove="bootstrap" />
+    <None Remove="Views\Account\" />
+    <None Remove="Microsoft.Owin.Host.SystemWeb" />
+    <None Remove="Microsoft.AspNetCore.Session" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -33,6 +38,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\Home\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
@@ -46,5 +52,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.13" />
     <PackageReference Include="PagedList.Core.Mvc" Version="3.0.0" />
     <PackageReference Include="AspNetCoreHero.ToastNotification" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.13" />
+    <PackageReference Include="bootstrap" Version="5.2.3" />
+    <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
   </ItemGroup>
 </Project>
