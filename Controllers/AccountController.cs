@@ -5,8 +5,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Web;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,6 +30,11 @@ namespace HospitalManagementSystem.Controllers
             }
 
         };
+        private readonly IAccountService _accountService;
+        public AccountController(IAccountService accountService)
+        {
+            _accountService = accountService;
+        }
 
         // GET: /<controller>/
         public IActionResult Index()
@@ -115,7 +122,54 @@ namespace HospitalManagementSystem.Controllers
             }
 
         }
+        [AllowAnonymous, HttpGet("forgot-password")]
+        public IActionResult ForgotPassword()
+        {
+            _accountService.AddDemoUserToDb();
+            return View();
+        }
+        [AllowAnonymous, HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _accountService.getUserByEmail(model.Email);
+                if (user != null)
+                {
+                    await _accountService.generateEmailResetPasswordTokenAsync(user);
+                }
+                ModelState.Clear();
+                model.EmailSent = true;
+            }
+            return View(model);
+        }
 
+        [AllowAnonymous, HttpGet("reset-password")]
+        public IActionResult ResetPassword(string uid, string token)
+        {
+            ResetPasswordModel resetPasswordModel = new ResetPasswordModel
+            {
+                UserId = uid,
+                Token = token
+            };
+            return View(resetPasswordModel);
+        }
+        [AllowAnonymous, HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Token = model.Token.Replace(' ', '+');
+                var result = await _accountService.ResetPasswordAsync(model);
+                if (result.Succeeded)
+                {
+                    ModelState.Clear();
+                    model.isSuccessful = true;
+                    return View(model);
+                }
+            }
+            return View(model);
+        }
         // Encrypt password - create a string MD5
         public static string GetMD5(string str)
         {

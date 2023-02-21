@@ -14,9 +14,10 @@ namespace HospitalManagementSystem.Models
         public double? Dosage { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public string? PatientId1 { get; set; }
 
         public virtual Doctor? Doctor { get; set; }
         public virtual Medicine? Medicine { get; set; }
-        public virtual Patient? Patient { get; set; }
+        public virtual AspNetUser? PatientId1Navigation { get; set; }
     }
 }

@@ -17,7 +17,6 @@ public class EmailService : IEmailService
     {
         userEmailOptions.Subject = UpdatePlaceHolders("Reset password for {{username}}", userEmailOptions.PlaceHolders);
         userEmailOptions.Body = UpdatePlaceHolders(GetEmail("ResetPasswordEmail"), userEmailOptions.PlaceHolders);
-
         await SendEmail(userEmailOptions);
     }
     public EmailService(IOptions<SMTPConfigModel> smtpConfig)

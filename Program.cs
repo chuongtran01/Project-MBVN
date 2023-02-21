@@ -2,14 +2,19 @@
 using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+// Connect database
+var connectionString = builder.Configuration.GetConnectionString("dbMBVN");
+builder.Services.AddDbContext<MBVNContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddIdentity<Patient, IdentityRole>().AddEntityFrameworkStores<MBVNContext>().AddDefaultTokenProviders();
 // Add services to the container.
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
-//builder.Services.Configure<SMTPConfigModel>(builder.Configuration.GetSection("SMTPConfig"));
+builder.Services.Configure<SMTPConfigModel>(builder.Configuration.GetSection("SMTPConfig"));
 
 var app = builder.Build();
 

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace HospitalManagementSystem.Models
 {
-    public partial class Patient
+    public partial class Patient : IdentityUser
     {
         public Patient()
         {
@@ -12,7 +13,7 @@ namespace HospitalManagementSystem.Models
             MedicalHistories = new HashSet<MedicalHistory>();
             Prescriptions = new HashSet<Prescription>();
         }
-
+        
         public int PatientId { get; set; }
         public string? Firstname { get; set; }
         public string? Lastname { get; set; }
