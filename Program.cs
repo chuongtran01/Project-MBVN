@@ -1,15 +1,30 @@
-﻿using AspNetCoreHero.ToastNotification;
+﻿using System.Text.Encodings.Web;
+using System.Text.Unicode;
+using AspNetCoreHero.ToastNotification;
 using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 // Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("dbMBVN");
+builder.Services.AddDbContext<MBVNContext>(options => options.UseSqlServer(connectionString));
+
+
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
 //builder.Services.Configure<SMTPConfigModel>(builder.Configuration.GetSection("SMTPConfig"));
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -27,6 +42,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
+
+//app.MapRazorPages();
 
 app.UseEndpoints(endpoints =>
 {

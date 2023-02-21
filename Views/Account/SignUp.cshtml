@@ -35,16 +35,30 @@
                         <p>
                             Enter your personal details below:
                         </p>
-                        <div class="form-group">
-                            @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "form-control" })
-                            @Html.ValidationMessageFor(temp => temp.Username, null, new { @class = "text-danger" })
+
+                        <div class="input-group mb-3">
+                            @Html.TextBoxFor(temp => temp.Firstname, new { placeholder = "First", @class = "form-control" })
+                            <span></span>
+                            @Html.TextBoxFor(temp => temp.Lastname, new { placeholder = "Last", @class = "form-control" })
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="padding-bottom: 15px;">
+                            @Html.TextBoxFor(temp => temp.Address, new { placeholder = "Address", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.Address, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group" style="padding-bottom: 15px;">
+                            @Html.DropDownListFor(m => m.Gender, new SelectList(Enum.GetValues(typeof(Gender))), "Select Gender")
+                            @Html.ValidationMessageFor(temp => temp.Password, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group" style="padding-bottom: 15px;">
+                            @Html.TextBoxFor(temp => temp.EmailAddress, new { placeholder = "Email", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.EmailAddress, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group" style="padding-bottom: 15px;">
                             @Html.PasswordFor(temp => temp.Password, new { placeholder = "Password", @class = "form-control" })
                             @Html.ValidationMessageFor(temp => temp.Password, null, new { @class = "text-danger" })
                         </div>
-                        <div class="form-group">
-                            @Html.PasswordFor(temp => temp.confirmPassword, new { placeholder = "Confirm your password", @class = "form-control" })
+                        <div class="form-group" style="padding-bottom: 15px;">
+                            @Html.PasswordFor(temp => temp.confirmPassword, new { placeholder = "Confirmed password", @class = "form-control" })
                             @Html.ValidationMessageFor(temp => temp.confirmPassword, null, new { @class = "text-danger" })
                         </div>
                         <div class="form-group error">
