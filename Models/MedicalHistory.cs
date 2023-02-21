@@ -14,8 +14,7 @@ namespace HospitalManagementSystem.Models
         public string? Temperature { get; set; }
         public string? MedicalPres { get; set; }
         public byte[]? CreationDate { get; set; }
-        public string? PatientId1 { get; set; }
 
-        public virtual AspNetUser? PatientId1Navigation { get; set; }
+        public virtual Patient? Patient { get; set; }
     }
 }

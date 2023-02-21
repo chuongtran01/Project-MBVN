@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace HospitalManagementSystem.Models
 {
-    public partial class MBVNContext : DbContext
+    public partial class hospitaldbContext : DbContext
     {
-        public MBVNContext()
+        public hospitaldbContext()
         {
         }
 
-        public MBVNContext(DbContextOptions<MBVNContext> options)
+        public hospitaldbContext(DbContextOptions<hospitaldbContext> options)
             : base(options)
         {
         }

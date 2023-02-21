@@ -15,9 +15,8 @@ namespace HospitalManagementSystem.Models
         public byte[]? PostingDate { get; set; }
         public int? PatientStatus { get; set; }
         public int? DoctorStatus { get; set; }
-        public string? PatientId1 { get; set; }
 
         public virtual Doctor? Doctor { get; set; }
-        public virtual AspNetUser? PatientId1Navigation { get; set; }
+        public virtual Patient? Patient { get; set; }
     }
 }

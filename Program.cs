@@ -8,8 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Connect database
 var connectionString = builder.Configuration.GetConnectionString("dbMBVN");
 builder.Services.AddDbContext<MBVNContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddIdentity<Patient, IdentityRole>().AddEntityFrameworkStores<MBVNContext>().AddDefaultTokenProviders();
-// Add services to the container.
+
+// Add services to the containers
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
