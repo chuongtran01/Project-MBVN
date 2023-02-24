@@ -6,6 +6,6 @@ namespace HospitalManagementSystem.Services
     public interface IAccountService
     {
         Task<bool> ResetPasswordAsync(ResetPasswordModel model);
-        Task SendResetPasswordEmail(Patient user);
+        Task<bool> SendResetPasswordEmail(string email);
     }
 }

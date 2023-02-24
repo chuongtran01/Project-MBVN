@@ -14,21 +14,26 @@ namespace HospitalManagementSystem.Services
             _emailService = emailservice;
             _context = context;
         }
-        public async Task SendResetPasswordEmail(Patient user)
+        public async Task<bool> SendResetPasswordEmail(string email)
         {
-            string appDomain = _configuration.GetSection("Application:AppDomain").Value;
-            string resetPasswordLink = _configuration.GetSection("Application:ForgotPassword").Value;
-            UserEmailOptions options = new()
+            var user = _context.Patients.Where(p => p.EmailAddress == email).FirstOrDefault();
+            if (user != null)
             {
-                toEmail = user.EmailAddress,
-                PlaceHolders = new List<KeyValuePair<string, string>>()
-                {
-                    new KeyValuePair<string, string>("{{username}}", user.Firstname),
-                    new KeyValuePair<string, string>("{{link}}",
-                        string.Format(appDomain + resetPasswordLink, user.PatientId))
-                }
-            };
-            await _emailService.SendResetPasswordEmail(options);
+				string appDomain = _configuration.GetSection("Application:AppDomain").Value;
+				string resetPasswordLink = _configuration.GetSection("Application:ForgotPassword").Value;
+				UserEmailOptions options = new()
+				{
+					toEmail = user.EmailAddress,
+					PlaceHolders = new List<KeyValuePair<string, string>>()
+				{
+					new KeyValuePair<string, string>("{{username}}", user.Firstname),
+					new KeyValuePair<string, string>("{{link}}",
+						string.Format(appDomain + resetPasswordLink, user.PatientId))
+				}
+				};
+				return await _emailService.SendResetPasswordEmail(options);
+			}
+            return false;
         }
         public async Task<bool> ResetPasswordAsync(ResetPasswordModel model)
         {

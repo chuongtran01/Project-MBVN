@@ -146,19 +146,14 @@ namespace HospitalManagementSystem.Controllers
         [AllowAnonymous, HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordModel model)
         {
-			List<Doctor> doctors = _context.Doctors.ToList();
-			doctors.ForEach(doctor => { Console.WriteLine(doctor.DoctorId); });
 			if (ModelState.IsValid)
             {
-                var user = _context.Patients.Where(p => p.EmailAddress== model.Email).FirstOrDefault();
-                if (user != null)
-                {
-                    await _accountService.SendResetPasswordEmail(user);
-                }
-            }
-                ModelState.Clear();
-                model.EmailSent = true;
-                return View(model);
+				await _accountService.SendResetPasswordEmail(model.Email);
+				ModelState.Clear();
+				model.EmailSent = true;
+				return View(model);
+			}
+            return View(model);
         }
 
 

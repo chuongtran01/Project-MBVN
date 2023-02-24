@@ -5,6 +5,6 @@ namespace HospitalManagementSystem.Services
 {
     public interface IEmailService
     {
-        Task SendResetPasswordEmail(UserEmailOptions userEmailOptions);
+        Task<bool> SendResetPasswordEmail(UserEmailOptions userEmailOptions);
     }
 }

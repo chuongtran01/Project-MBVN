@@ -28,8 +28,6 @@
 							</ol>
 						</div>
 					</section>
-					<!-- end: PAGE TITLE -->
-					<!-- start: BASIC EXAMPLE -->
 					<div class="container-fluid container-fullw bg-white">
 						<div class="row">
 							<div class="col-md-12">
@@ -60,7 +58,7 @@
 													<td>@item.DepartmentId</td>
 													<td>
 														<div class="visible-md visible-lg hidden-sm hidden-xs">
-															<a class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+															<a asp-action="DoctorDetails" asp-route-id="@item.DoctorId" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
 
 															<a &del="delete" onClick="return confirm('Are you sure you want to delete?')" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
 														</div>
@@ -80,8 +78,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- end: BASIC EXAMPLE -->
-			<!-- end: SELECT BOXES -->
 
 		</div>
 	</div>
