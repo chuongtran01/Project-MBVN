@@ -41,7 +41,7 @@
                             @Html.PasswordFor(temp => temp.Password, new { placeholder = "Password", @class = "form-control" })
                             @Html.ValidationMessageFor(temp => temp.Password, null, new { @class = "text-danger" })
                             <i class="fa fa-lock"></i>
-                        </span><a asp-area="" asp-controller="Login" asp-action="ForgotPassword">
+                        </span><a asp-area="" asp-controller="Account" asp-action="ForgotPassword">
                             Forgot Password ?
                         </a>
                     </div>

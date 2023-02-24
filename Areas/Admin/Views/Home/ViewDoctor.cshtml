@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Doctor>
+@{
+	ViewData["Title"] = "Doctor List";
+}
+<head>
+	<title>Admin | Manage Doctors</title>
+
+</head>
+<body>
+	<div>
+		<div class="app-content">
+			<!-- end: TOP NAVBAR -->
+			<div class="main-content">
+				<div class="wrap-content container" id="container">
+					<!-- start: PAGE TITLE -->
+					<section id="page-title">
+						<div class="row">
+							<div class="col-sm-8">
+								<h1 class="mainTitle">Admin | Manage Doctors</h1>
+							</div>
+							<ol class="breadcrumb">
+								<li>
+									<span>Admin</span>
+								</li>
+								<li class="active">
+									<span>Manage Doctors</span>
+								</li>
+							</ol>
+						</div>
+					</section>
+					<div class="container-fluid container-fullw bg-white">
+						<div class="row">
+							<div class="col-md-12">
+								<h5 class="over-title margin-bottom-15">Manage <span class="text-bold">Doctors</span></h5>
+								<p style="color:red;">
+								</p>
+								<table class="table table-hover" id="sample-table-1">
+									<thead>
+										<tr>
+											<th class="center">#</th>
+											<th>Specialization</th>
+											<th class="hidden-xs">Doctor Name</th>
+											<th>Department ID </th>
+											<th>Action</th>
+
+										</tr>
+									</thead>
+									<tbody>
+
+										@if (Model != null)
+										{
+											foreach (var item in Model)
+											{
+												<tr>
+													<td>@item.DoctorId</td>
+													<td>@item.Field</td>
+													<td>@item.Name</td>
+													<td>@item.DepartmentId</td>
+													<td>
+														<div class="visible-md visible-lg hidden-sm hidden-xs">
+															<a asp-action="DoctorDetails" asp-route-id="@item.DoctorId" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+
+															<a &del="delete" onClick="return confirm('Are you sure you want to delete?')" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
+														</div>
+														<div class="visible-xs visible-sm hidden-md hidden-lg">
+															<div class="btn-group" dropdown is-open="status.isopen">
+															</div>
+														</div>
+													</td>
+												</tr>
+											}
+										}
+									</tbody>
+								</table>
+								<br />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>

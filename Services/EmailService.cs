@@ -13,12 +13,20 @@ public class EmailService : IEmailService
     private const string templatePath = @"EmailTemplate/{0}.html";
     private readonly SMTPConfigModel _smtpConfig;
 
-    public async Task SendResetPasswordEmail(UserEmailOptions userEmailOptions)
+    public async Task<bool> SendResetPasswordEmail(UserEmailOptions userEmailOptions)
     {
-        userEmailOptions.Subject = UpdatePlaceHolders("Reset password for {{username}}", userEmailOptions.PlaceHolders);
-        userEmailOptions.Body = UpdatePlaceHolders(GetEmail("ResetPasswordEmail"), userEmailOptions.PlaceHolders);
+        try
+		{
+			userEmailOptions.Subject = UpdatePlaceHolders("Reset password for {{username}}", userEmailOptions.PlaceHolders);
+			userEmailOptions.Body = UpdatePlaceHolders(GetEmail("ResetPasswordEmail"), userEmailOptions.PlaceHolders);
+			await SendEmail(userEmailOptions);
+            return true;
+		}
+        catch (Exception ex)
+        {
 
-        await SendEmail(userEmailOptions);
+            return false;
+        }
     }
     public EmailService(IOptions<SMTPConfigModel> smtpConfig)
     {
