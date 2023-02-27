@@ -28,9 +28,8 @@
     <None Remove="Views\Account\" />
     <None Remove="Microsoft.Owin.Host.SystemWeb" />
     <None Remove="Microsoft.AspNetCore.Session" />
-    <None Remove="EmailTemplate\" />
     <None Remove="Services\" />
-    <None Remove="Views\Login\" />
+    <None Remove="Areas\Admin\Views\Specialization\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -42,9 +41,8 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\Home\" />
     <Folder Include="Views\Account\" />
-    <Folder Include="EmailTemplate\" />
     <Folder Include="Services\" />
-    <Folder Include="Views\Login\" />
+    <Folder Include="Areas\Admin\Views\Specialization\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />

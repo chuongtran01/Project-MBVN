@@ -34,12 +34,16 @@ namespace HospitalManagementSystem.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly MBVNContext _context;
         private readonly IAccountService _accountService;
+        private readonly ILogInService _logInService;
+        private readonly IManageProfile _manageProfile;
 
-        public AccountController(IHttpContextAccessor httpContextAccessor, MBVNContext context, IAccountService accountService)
+        public AccountController(IHttpContextAccessor httpContextAccessor, MBVNContext context, IAccountService accountService, ILogInService logInService, IManageProfile manageProfile)
         {
             _httpContextAccessor = httpContextAccessor;
             _context = context;
             _accountService = accountService;
+            _logInService = logInService;
+            _manageProfile = manageProfile;
         }
         // GET: /<controller>/
         public IActionResult Index()
@@ -54,17 +58,19 @@ namespace HospitalManagementSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LogInViewModel model)
+        public async Task<IActionResult> LoginAsync(LogInViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var encryptedPassword = GetMD5(model.Password);
-                var result = _context.Patients.Where(s => s.EmailAddress.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
 
+                //var encryptedPassword = GetMD5(model.Password);
+                //var user = _context.Patients.Where(s => s.EmailAddress.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
 
-                if (result != null)
+                bool success = await _logInService.LogIn(model);
+
+                if (success == true)
                 {
-                    HttpContext.Session.SetString("UID", result.PatientId.ToString());
+                    //HttpContext.Session.SetString("UID", patientID);
                     return RedirectToAction("Index", "Home");
 
                 }
@@ -79,7 +85,7 @@ namespace HospitalManagementSystem.Controllers
 
         public ActionResult Logout()
         {
-            HttpContext.Session.Clear();
+            _logInService.LogOut();
             return RedirectToAction("Index", "Home");
         }
 
@@ -94,35 +100,16 @@ namespace HospitalManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!model.Password.Equals(model.confirmPassword))
+                if (!_logInService.ConfirmPassword(model))
                 {
                     ViewBag.error = "Confirmed password does not match";
                     return View();
                 }
-                var check = _context.Patients.Where(s => s.EmailAddress == model.EmailAddress).FirstOrDefault();
 
-                if (check == null)
+                bool checkSignUp = await _logInService.SignUp(model);
+
+                if (checkSignUp)
                 {
-                    Patient newUser = new Patient()
-                    {
-                        Firstname = model.Firstname,
-                        Lastname = model.Lastname,
-                        Midname = null,
-                        Address = model.Address,
-                        Gender = model.Gender,
-                        EmailAddress = model.EmailAddress,
-                        Password = GetMD5(model.Password),
-                        PhoneNumber = null,
-                        EmergencyContact = null,
-                        PhotoImage = null,
-                        CreatedDate = null,
-                        LastVisited = null,
-                    };
-                    _context.Patients.AddAsync(newUser);
-                    await _context.SaveChangesAsync();
-                    //models.Add(newUser);
-                    HttpContext.Session.SetString("UID", newUser.PatientId.ToString());
-
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -181,30 +168,38 @@ namespace HospitalManagementSystem.Controllers
             }
             return View(model);
         }
-        // Encrypt password - create a string MD5
-        public static string GetMD5(string str)
-        {
-            MD5 md5 = new MD5CryptoServiceProvider();
-
-            byte[] fromData = Encoding.UTF8.GetBytes(str);
-            byte[] targetData = md5.ComputeHash(fromData);
-            string byte2String = null;
-
-            for (int i = 0; i < targetData.Length; i++)
-            {
-                byte2String += targetData[i].ToString("x2");
-            }
-
-            return byte2String;
-        }
 
         [HttpGet]
         public IActionResult ManageProfile()
         {
             var curUserId = Int32.Parse(HttpContext.Session.GetString("UID"));
             var curUser = _context.Patients.Where(s => s.PatientId.Equals(curUserId)).FirstOrDefault();
+
+            ManageProfileViewModel user = new ManageProfileViewModel
+            {
+                ID = curUser.PatientId,
+                FirstName = "Chuong",
+                Email = curUser.EmailAddress,
+                Address = "266 dfdas",
+                Gender = curUser.Gender,
+            };
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ManageProfile(ManageProfileViewModel model)
+        {
+            var curUser = await _context.Patients.FindAsync(model.ID);
+
+            curUser.Address = model.Address;
+            curUser.Gender = model.Gender;
+            curUser.LastVisited = DateTime.Now;
+
+            await _context.SaveChangesAsync();
             
-            return View(curUser);
+
+            return View(model);
         }
     }
 }
