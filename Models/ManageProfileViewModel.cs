@@ -1,13 +1,25 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace HospitalManagementSystem.Models
 {
     public class ManageProfileViewModel
     {
-        public string Username { get; set; }
+        public int ID { get; set; }
+        public string FirstName { get; set; }
+        [Required(ErrorMessage = "Address can not be blank")]
         public string Address { get; set; }
-        public string City { get; set; }
+        [Required(ErrorMessage = "Gender can not be blank")]
         public string Gender { get; set; }
+        [Required(ErrorMessage = "Email can not be blank")]
         public string Email { get; set; }
+    }
+
+    public enum GenderSelection
+    {
+        Male,
+        Female,
+        Notspecified
     }
 }
 
