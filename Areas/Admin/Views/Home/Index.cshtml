@@ -3,4 +3,115 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
+<?php
+session_start();
+error_reporting(0);
+include('include/config.php');
+if(strlen($_SESSION['id']==0)) {
+ header('location:logout.php');
+  } else{
+
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Admin  | Dashboard</title>
+
+
+</head>
+<body>
+	<div id="app">
+		<div class="app-content">
+			<!-- end: TOP NAVBAR -->
+			<div class="main-content">
+				<div class="wrap-content container" id="container">
+					<!-- start: PAGE TITLE -->
+					<section id="page-title">
+						<div class="row">
+							<div class="col-sm-8">
+								<h1 class="mainTitle">Admin | Dashboard</h1>
+							</div>
+							<ol class="breadcrumb">
+								<li>
+									<span>Admin</span>
+								</li>
+								<li class="active">
+									<span>Dashboard</span>
+								</li>
+							</ol>
+						</div>
+					</section>
+					<div class="container-fluid container-fullw bg-white">
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="panel panel-white no-radius text-center">
+									<div class="panel-body">
+										<span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-users fa-stack-1x fa-inverse"></i> </span>
+										<h2 class="StepTitle">Manage Doctors</h2>
+
+										<p class="cl-effect-1">
+											<a asp-controller="Doctor" asp-action="Index">
+												Total Doctor
+											</a>
+
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="panel panel-white no-radius text-center">
+									<div class="panel-body">
+										<span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-terminal fa-stack-1x fa-inverse"></i> </span>
+										<h2 class="StepTitle"> Appointments</h2>
+
+										<p class="links cl-effect-1">
+											<a href="">
+												Total Appointment
+											</a>
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-4">
+								<div class="panel panel-white no-radius text-center">
+									<div class="panel-body">
+										<span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-smile-o fa-stack-1x fa-inverse"></i> </span>
+										<h2 class="StepTitle">Manage Patients</h2>
+
+										<p class="links cl-effect-1">
+											<a href="">
+												Total Patient
+											</a>
+										</p>
+									</div>
+								</div>
+							</div>
+
+
+
+
+
+							<div class="col-sm-4">
+								<div class="panel panel-white no-radius text-center">
+									<div class="panel-body">
+										<span class="fa-stack fa-2x"> <i class="ti-files fa-1x text-primary"></i> <i class="fa fa-terminal fa-stack-1x fa-inverse"></i> </span>
+										<h2 class="StepTitle"> New Queries</h2>
+
+										<p class="links cl-effect-1">
+											<a href="">
+													Total New Queries : 0
+											</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

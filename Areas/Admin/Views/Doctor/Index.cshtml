@@ -20,10 +20,7 @@
 							</div>
 							<ol class="breadcrumb">
 								<li>
-									<span>Admin</span>
-								</li>
-								<li class="active">
-									<span>Manage Doctors</span>
+									<span><a asp-action="Create">Add Doctor</a></span>
 								</li>
 							</ol>
 						</div>
@@ -58,9 +55,10 @@
 													<td>@item.DepartmentId</td>
 													<td>
 														<div class="visible-md visible-lg hidden-sm hidden-xs">
-															<a asp-action="DoctorDetails" asp-route-id="@item.DoctorId" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
-
-															<a &del="delete" onClick="return confirm('Are you sure you want to delete?')" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
+															<form asp-action="Delete" asp-route-id="@item.DoctorId">
+																<a asp-action="Details" asp-route-id="@item.DoctorId" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+																<button type="submit"  onClick="return confirm('Are you sure you want to delete?')"  class="btn btn-transparent btn-xs"><i class="fa fa-times fa fa-white"></i></button>
+															</form>
 														</div>
 														<div class="visible-xs visible-sm hidden-md hidden-lg">
 															<div class="btn-group" dropdown is-open="status.isopen">

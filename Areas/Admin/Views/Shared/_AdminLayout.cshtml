@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HospitalManagementSystem.styles.css" asp-append-version="true" />
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/font-awesome.min.css">
+    <link rel="stylesheet" href="~/icon/themify-icons.min.css">
+	<link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="~/css/themes/theme-1.css" id="skin_color" />
 </head>
 <body>
     <header>
@@ -26,13 +31,219 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="ViewDoctor">Manage Doctor</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Doctor" asp-action="Index">Manage Doctor</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+	<div class="sidebar app-aside">
+		<div class="sidebar-container">
+			<nav>
+				<div class="navbar-title">
+					<span>Main Navigation</span>
+				</div>
+				<ul class="main-navigation-menu">
+					<li>
+						<a asp-controller="Home" asp-action="Index">
+							<div class="item-content">
+								<div class="item-media">
+									<i class="ti-home"></i>
+								</div>
+								<div class="item-inner">
+									<span class="title"> Dashboard </span>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">
+							<div class="item-content">
+								<div class="item-media">
+									<i class="ti-user"></i>
+								</div>
+								<div class="item-inner">
+									<span class="title"> Doctors </span><i class="icon-arrow"></i>
+								</div>
+							</div>
+						</a>
+						<ul class="sub-menu">
+							<li>
+								<a>
+									<span class="title"> Doctor Specialization </span>
+								</a>
+							</li>
+							<li>
+								<a asp-controller="Doctor" asp-action="Create">
+									<span class="title"> Add Doctor</span>
+								</a>
+							</li>
+							<li>
+								<a asp-controller="Doctor" asp-action="Index">
+									<span class="title"> Manage Doctors </span>
+								</a>
+							</li>
+
+						</ul>
+					</li>
+					<li>
+						<a href="#">
+							<div class="item-content">
+								<div class="item-media">
+									<i class="ti-user"></i>
+								</div>
+								<div class="item-inner">
+									<span class="title"> Patients </span><i class="icon-arrow"></i>
+								</div>
+							</div>
+						</a>
+						<ul class="sub-menu">
+
+							<li>
+								<a href="">
+									<span class="title"> Manage Patients </span>
+								</a>
+							</li>
+
+						</ul>
+					</li>
+
+					<li>
+						<a href="">
+							<div class="item-content">
+								<div class="item-media">
+									<i class="ti-file"></i>
+								</div>
+								<div class="item-inner">
+									<span class="title"> Appointment History </span>
+								</div>
+							</div>
+						</a>
+					</li>
+
+
+
+					<li>
+						<a href="#">
+							<div class="item-content">
+								<div class="item-media">
+									<i class="ti-files"></i>
+								</div>
+								<div class="item-inner">
+									<span class="title"> Conatctus Queries </span><i class="icon-arrow"></i>
+								</div>
+							</div>
+						</a>
+						<ul class="sub-menu">
+
+							<li>
+								<a href="">
+									<span class="title"> Unread Query </span>
+								</a>
+							</li>
+
+							<li>
+								<a href="read-query.php">
+									<span class="title"> Read Query </span>
+								</a>
+							</li>
+
+						</ul>
+					</li>
+
+
+
+					<li>
+						<a href="">
+							<div class="item-content">
+								<div class="item-media">
+									<i class="ti-list"></i>
+								</div>
+								<div class="item-inner">
+									<span class="title"> Doctor Session Logs </span>
+								</div>
+							</div>
+						</a>
+					</li>
+
+
+
+					<li>
+						<a href="">
+							<div class="item-content">
+								<div class="item-media">
+									<i class="ti-list"></i>
+								</div>
+								<div class="item-inner">
+									<span class="title"> User Session Logs </span>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="item-content">
+								<div class="item-media">
+									<i class="ti-files"></i>
+								</div>
+								<div class="item-inner">
+									<span class="title"> Reports </span><i class="icon-arrow"></i>
+								</div>
+							</div>
+						</a>
+					</li>
+
+					<!--- Pages---->
+					<li>
+						<a href="#">
+							<div class="item-content">
+								<div class="item-media">
+									<i class="ti-file"></i>
+								</div>
+								<div class="item-inner">
+									<span class="title"> Pages </span><i class="icon-arrow"></i>
+								</div>
+							</div>
+						</a>
+						<ul class="sub-menu">
+
+							<li>
+								<a href="">
+									<span class="title">About Us </span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="title">Cotnact Us </span>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+
+
+
+					<li>
+						<a href="">
+							<div class="item-content">
+								<div class="item-media">
+									<i class="ti-search"></i>
+								</div>
+								<div class="item-inner">
+									<span class="title"> Patient Search </span>
+								</div>
+							</div>
+						</a>
+					</li>
+
+
+				</ul>
+				<!-- end: CORE FEATURES -->
+
+			</nav>
+		</div>
+	</div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
