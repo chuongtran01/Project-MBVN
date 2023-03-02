@@ -29,7 +29,6 @@
     <None Remove="Microsoft.Owin.Host.SystemWeb" />
     <None Remove="Microsoft.AspNetCore.Session" />
     <None Remove="Services\" />
-    <None Remove="Areas\Admin\Views\Specialization\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -42,7 +41,6 @@
     <Folder Include="Areas\Admin\Views\Home\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Services\" />
-    <Folder Include="Areas\Admin\Views\Specialization\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
