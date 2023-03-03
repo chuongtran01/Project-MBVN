@@ -3,12 +3,15 @@ using HospitalManagementSystem.Models;
 
 namespace HospitalManagementSystem.Areas.Admin.Services
 {
-    public interface IDoctorControllerService
+    public interface IDatabaseService
     {
         Task<Doctor> GetDoctor(int doctorId);
         Task<List<Doctor>> GetAllDoctor();
         Task<bool> AddDoctor(CreateDoctorModel model);
         bool DeleteDoctor(int id);
         Task<bool> UpdateDoctor(DoctorDetailModel model);
-    }
+		Task<List<Appointment>> GetAllAppointments();
+		Task<Appointment> GetAppointment(int appointmentId);
+		Task<List<UserLog>> GetUserLog();
+	}
 }

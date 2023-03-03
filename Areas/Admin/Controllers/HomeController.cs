@@ -15,11 +15,9 @@ namespace HospitalManagementSystem.Areas.Admin.Controllers
 	[Area("Admin")]
 	public class HomeController : Controller
 	{
-		private readonly MBVNContext _context;
 
-		public HomeController(MBVNContext context)
+		public HomeController()
 		{
-			_context = context;
 		}
 		// GET: /<controller>/
 		public IActionResult Index()
