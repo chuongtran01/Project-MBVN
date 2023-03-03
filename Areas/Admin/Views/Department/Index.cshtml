@@ -62,11 +62,15 @@
                                                             @*<button type="submit" onClick="return confirm('Are you sure you want to delete?')" class="btn btn-transparent btn-xs"><i class="fa fa-times fa fa-white"></i></button>*@
                                                             @*@Html.ActionLink("Delete", "Delete", "Department", new {id = @item.DepartmentId}, null)*@
                                                             @using (Html.BeginForm("Delete", "Department", FormMethod.Post))
-                                                            {
-                                                                <input type="hidden" name="Id" value="" />
-                                                                <input type="submit" value="Delete" onclick="setDeletedId(@item.DepartmentId)" />
-                                                            }
-                                                        </div>
+                                                                {
+                                                                @*<form asp-action="Delete" asp-route-id="@item.DepartmentId">*@
+                                                                    <input type="hidden" name="Id" value=@item.DepartmentId />
+                                                                    @*<input type="submit" value="Delete"/>*@
+                                                                    <button type="submit" onClick="return confirm('Are you sure you want to delete?')" class="btn btn-transparent btn-xs"><i class="fa fa-times fa fa-white"></i></button>
+
+                                                                }
+                                                                    @*</form>*@
+                                                            </div>
                                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                                 <div class="btn-group" dropdown is-open="status.isopen">
                                                                 </div>
@@ -88,9 +92,9 @@
     </div>
 </body>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
     function setDeletedId(deletedId) {
         var hidden = document.getElementById("Id");
         hidden.value = deletedId;
     }
-</script>
+</script>*@

@@ -107,15 +107,16 @@ namespace HospitalManagementSystem.Controllers
 
         //[Route("/Delete/{id}")]
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int Id)
         {
             //try
             //{
-            Department cur = await _context.Departments.FindAsync(id);
-                //Department cur = await _context.Departments.Where(s => s.DepartmentId.Equals(id)).FirstOrDefaultAsync();
-                //Department departmentToRemove = new() { DepartmentId = id };
-                //_context.Departments.Attach(departmentToRemove);
-                _context.Departments.Remove(cur);
+            //Department cur = await _context.Departments.FindAsync(id)
+            //int intID = Int32.Parse(Id);
+                Department cur = await _context.Departments.Where(s => s.DepartmentId.Equals(Id)).FirstOrDefaultAsync();
+            //Department departmentToRemove = new() { DepartmentId = id };
+            //_context.Departments.Attach(departmentToRemove);
+            _context.Departments.Remove(cur);
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction("Index", "Department");

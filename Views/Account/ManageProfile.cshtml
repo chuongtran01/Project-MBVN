@@ -53,11 +53,7 @@ $msg="Your Profile updated Successfully";
 </head>
 <body>
     <div id="app">
-        <?php include('include/sidebar.php');?>
         <div class="app-content">
-
-            <?php include('include/header.php');?>
-
             <!-- end: TOP NAVBAR -->
             <div class="main-content">
                 <div class="wrap-content container" id="container">
@@ -92,10 +88,19 @@ $msg="Your Profile updated Successfully";
                                             </div>
                                             <div class="panel-body margin-top-10">
 
-                                                <h4>@Model.FirstName's Profile</h4>
-                                                
+                                                @*<h4>@Model.FirstName's Profile</h4>*@
+
                                                 @using (Html.BeginForm("ManageProfile", "Account", FormMethod.Post))
                                                 {
+                                                    <input type="hidden" asp-for="ID" />
+                                                    <div class="form-group">
+                                                        <label for="fname">
+                                                            Name
+                                                        </label>
+                                                        @Html.TextBoxFor(s => s.FirstName, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(temp => temp.FirstName, null, new { @class = "text-danger" })
+                                                        @*<input type="text" name="fname" class="form-control" value="<?php echo htmlentities($data['fullName']);?>">*@
+                                                    </div>
                                                     <div class="form-group">
                                                         <label for="fname">
                                                             Email Address
@@ -131,7 +136,7 @@ $msg="Your Profile updated Successfully";
 
                                                 }
 
-                                        </div>
+                                            </div>
                                     </div>
 
                                 </div>

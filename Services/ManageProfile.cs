@@ -43,9 +43,9 @@ namespace HospitalManagementSystem.Services
                 ManageProfileViewModel user = new ManageProfileViewModel
                 {
                     ID = curUser.PatientId,
-                    FirstName = "Chuong",
+                    FirstName = curUser.Firstname,
                     Email = curUser.EmailAddress,
-                    Address = "266 dfdas",
+                    Address = curUser.Address,
                     Gender = curUser.Gender,
                 };
 

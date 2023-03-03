@@ -26,6 +26,7 @@ namespace HospitalManagementSystem.Areas.Admin.Controllers
 		{
 			return View();
 		}
+
 		public async Task<ViewResult> ViewDoctor()
 		{
 			List<Doctor> doctors = await _context.Doctors.Select(d => new Doctor()
@@ -46,12 +47,14 @@ namespace HospitalManagementSystem.Areas.Admin.Controllers
 			Console.WriteLine(model.DoctorId);
 			return View(model);
 		}
+
 		[HttpGet]
 		public async Task<ViewResult> Edit(int id)
 		{
 			Doctor doctor = await _context.Doctors.Where(d => d.DoctorId == id).FirstOrDefaultAsync();
 			return View(doctor);
 		}
+
 		[HttpPost]
 		public async Task<RedirectToActionResult> Edit(DoctorDetailModel model)
 		{

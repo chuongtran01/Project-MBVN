@@ -35,15 +35,15 @@ namespace HospitalManagementSystem.Controllers
         private readonly MBVNContext _context;
         private readonly IAccountService _accountService;
         private readonly ILogInService _logInService;
-        private readonly IManageProfile _manageProfile;
+        //private readonly IManageProfile _manageProfile;
 
-        public AccountController(IHttpContextAccessor httpContextAccessor, MBVNContext context, IAccountService accountService, ILogInService logInService, IManageProfile manageProfile)
+        public AccountController(IHttpContextAccessor httpContextAccessor, MBVNContext context, IAccountService accountService, ILogInService logInService)
         {
             _httpContextAccessor = httpContextAccessor;
             _context = context;
             _accountService = accountService;
             _logInService = logInService;
-            _manageProfile = manageProfile;
+            //_manageProfile = manageProfile;
         }
         // GET: /<controller>/
         public IActionResult Index()
@@ -178,9 +178,9 @@ namespace HospitalManagementSystem.Controllers
             ManageProfileViewModel user = new ManageProfileViewModel
             {
                 ID = curUser.PatientId,
-                FirstName = "Chuong",
+                FirstName = curUser.Firstname,
                 Email = curUser.EmailAddress,
-                Address = "266 dfdas",
+                Address = curUser.Address,
                 Gender = curUser.Gender,
             };
 
@@ -190,16 +190,33 @@ namespace HospitalManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> ManageProfile(ManageProfileViewModel model)
         {
-            var curUser = await _context.Patients.FindAsync(model.ID);
+            if (ModelState.IsValid)
+            {
+                Patient curUser = _context.Patients.Where(s => s.PatientId.Equals(model.ID)).FirstOrDefault();
 
-            curUser.Address = model.Address;
-            curUser.Gender = model.Gender;
-            curUser.LastVisited = DateTime.Now;
+                if (curUser != null)
+                {
+                    curUser.Firstname = model.FirstName;
+                    curUser.Address = model.Address;
+                    curUser.Gender = model.Gender;
+                    curUser.LastVisited = DateTime.Now;
 
-            await _context.SaveChangesAsync();
-            
+                    _context.Patients.Update(curUser);
+                    await _context.SaveChangesAsync();
 
-            return View(model);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.error = "User does not exist!";
+                    return View();
+                }
+            }
+            else
+            {
+                ViewBag.error = "Model is invalid!";
+                return View();
+            }
         }
     }
 }
