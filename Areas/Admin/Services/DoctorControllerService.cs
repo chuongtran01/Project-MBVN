@@ -4,32 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HospitalManagementSystem.Areas.Admin.Services
 {
-    public class DatabaseService : IDatabaseService
+    public class DoctorControllerService : IDoctorControllerService
     {
         private MBVNContext _context;
-        public DatabaseService(MBVNContext context)
+        public DoctorControllerService(MBVNContext context)
         {
             _context = context;
-		}
-        // APPOINTMENT
-		public async Task<List<Appointment>> GetAllAppointments()
-		{
-			return await _context.Appointments.Select(a => new Appointment()
-			{
-				AppointmentDate = a.AppointmentDate,
-                AppontmentTime = a.AppontmentTime,
-                AppointmentId = a.AppointmentId,
-                DoctorId = a.DoctorId,
-                PatientId = a.PatientId
-			}).ToListAsync();
-		}
-		public async Task<Appointment> GetAppointment(int appointmentId)
-		{
-			return await _context.Appointments.Where(a => a.AppointmentId == appointmentId).FirstOrDefaultAsync();
-		}
+        }
 
-        // DOCTOR 
-		public async Task<Doctor> GetDoctor(int doctorId)
+        public async Task<Doctor> GetDoctor(int doctorId)
         {
             return await _context.Doctors.Where(d => d.DoctorId == doctorId).FirstOrDefaultAsync();
         }
@@ -108,10 +91,5 @@ namespace HospitalManagementSystem.Areas.Admin.Services
                 return false;
             }
         }
-		// USER LOG
-		public async Task<List<UserLog>> GetUserLog()
-		{
-			return await _context.UserLogs.ToListAsync();
-		}
-	}
+    }
 }

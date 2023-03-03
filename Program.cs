@@ -1,5 +1,4 @@
 ﻿using AspNetCoreHero.ToastNotification;
-using HospitalManagementSystem.Areas.Admin.Services;
 using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Services;
 using Microsoft.AspNetCore.Identity;
@@ -21,9 +20,7 @@ builder.Services.AddSession(options =>
 // Add services to the containers
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
-builder.Services.AddScoped<IDatabaseService, DatabaseService>();
 builder.Services.AddScoped<ILogInService, LogInService>();
-builder.Services.AddScoped<IManageProfile, ManageProfile>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
 builder.Services.Configure<SMTPConfigModel>(builder.Configuration.GetSection("SMTPConfig"));

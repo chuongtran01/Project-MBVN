@@ -55,18 +55,7 @@ namespace HospitalManagementSystem.Services
             if (user != null)
             {
                 _httpContextAccessor.HttpContext.Session.SetString("UID", user.PatientId.ToString());
-                long bNow = DateTime.Now.ToBinary();
-                byte[] arrayNow = BitConverter.GetBytes(bNow);
-                UserLog userLog = new()
-                {
-                    Uid = user.PatientId,
-                    Username = user.EmailAddress,
-                    LoginTime = arrayNow,
-                    Status = 1
-                };
-                await _context.AddAsync(userLog);
-                _context.SaveChanges();
-				return true;
+                return true;
             }
             else
             {
@@ -74,12 +63,10 @@ namespace HospitalManagementSystem.Services
             }
         }
 
-        public async Task<bool> LogOut()
+        public bool LogOut()
         {
-            UserLog ul = _context.UserLogs.Where(ul => ul.Uid == Int32.Parse(_httpContextAccessor.HttpContext.Session.GetString("UID"))).FirstOrDefault();
-            ul.Status = 0;
-            _context.SaveChanges();
-            _httpContextAccessor.HttpContext.Session.Clear();
+            _httpContextAccessor.HttpContext.Session.Remove("UID");
+
             if (_httpContextAccessor.HttpContext.Session.GetString("UID") == null) {
                 return true;
             }

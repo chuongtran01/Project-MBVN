@@ -1,13 +1,32 @@
 ﻿@{
-    ViewData["Title"] = "Admin";
+    ViewData["Title"] = "Admin Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+
+<?php
+session_start();
+error_reporting(0);
+include('include/config.php');
+if(strlen($_SESSION['id']==0)) {
+ header('location:logout.php');
+  } else{
+
+
+?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<title>Admin  | Dashboard</title>
 
 
 </head>
 <body>
+	<div id="app">
+		<div class="app-content">
+			<!-- end: TOP NAVBAR -->
+			<div class="main-content">
+				<div class="wrap-content container" id="container">
+					<!-- start: PAGE TITLE -->
 					<section id="page-title">
 						<div class="row">
 							<div class="col-sm-8">
@@ -90,4 +109,9 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+</html>

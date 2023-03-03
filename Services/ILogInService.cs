@@ -10,7 +10,7 @@ namespace HospitalManagementSystem.Services
         public Task<bool> LogIn(LogInViewModel model);
         public Task<bool> SignUp(SignUpViewModel model);
         public bool ConfirmPassword(SignUpViewModel model);
-        public Task<bool> LogOut();
+        public bool LogOut();
     }
 }
 
