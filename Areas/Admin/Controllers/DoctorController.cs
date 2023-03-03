@@ -10,8 +10,8 @@ namespace HospitalManagementSystem.Areas.Admin.Controllers
     [Area("Admin")]
     public class DoctorController : Controller
     {
-        private readonly IDoctorControllerService _service;
-        public DoctorController(IDoctorControllerService service)
+        private readonly IDatabaseService _service;
+        public DoctorController(IDatabaseService service)
         {
             _service = service;
         }
@@ -76,7 +76,7 @@ namespace HospitalManagementSystem.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
         }
-        [HttpPost]
+        [HttpDelete]
         public RedirectToActionResult Delete(int id)
         {
             try
@@ -86,13 +86,13 @@ namespace HospitalManagementSystem.Areas.Admin.Controllers
                 {
                     ModelState.Clear();
                 }
-                return RedirectToAction("Index");
-            }
+				return RedirectToAction("Index");
+			}
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return RedirectToAction("Index");
-            }
+				return RedirectToAction("Index");
+			}
         }
     }
 }

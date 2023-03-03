@@ -20,21 +20,21 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(m=>m.Birthday)
-                @Html.TextBoxFor(m => m.Birthday, new {@class = "form-control dateInput"})
+                @Html.TextBoxFor(m => m.Birthday, new {@class = "form-control datepicker", @type = "date"})
             </div>
             <div class="form-group">
                 @Html.LabelFor(m=>m.EmailAddress)
                 @Html.TextBoxFor(m => m.EmailAddress, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.EmailAddress, null, new { @class = "text-danger"})
+                @Html.ValidationMessageFor(m => m.EmailAddress, null, new {@class = "text-danger"})
             </div>
             <div class="form-group">
                 @Html.LabelFor(m=>m.Password)
-                @Html.TextBoxFor(m => m.Password, new {@class = "form-control"})
+                @Html.TextBoxFor(m => m.Password, new {@class = "form-control", @type = "password"})
             </div>
             <div class="form-group">
                 @Html.LabelFor(m=>m.PhoneNumber)
-                @Html.TextBoxFor(m => m.PhoneNumber, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "text-danger" })
+                @Html.TextBoxFor(m => m.PhoneNumber, new {@class = "form-control", @type = "tel" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "text-danger"})
             </div>
             <div class="form-group">
                 @Html.LabelFor(m=>m.DepartmentId)
