@@ -10,11 +10,7 @@
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="~/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="~/lib/icon/themify-icons.min.css">
-    <link rel="stylesheet" href="~/css/styles.css">
-    <link rel="stylesheet" href="~/css/plugins.css">
-    <link rel="stylesheet" href="~/css/themes/theme-1.css" id="skin_color" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
     <link rel="stylesheet" href="~/HospitalManagementSystem.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -43,16 +39,14 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="ManageProfile">Manage Profile</a>
                             </li>
                         }
-
-
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    @RenderBody()
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
         </main>
     </div>
 

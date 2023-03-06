@@ -185,42 +185,6 @@
       "PackagePath": "staticwebassets\\css\\plugins.css"
     },
     {
-      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
-    },
-    {
-      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\css\\style.css",
-      "PackagePath": "staticwebassets\\css\\style.css"
-    },
-    {
-      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\css\\styles.css",
-      "PackagePath": "staticwebassets\\css\\styles.css"
-    },
-    {
-      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\css\\themes\\theme-1.css",
-      "PackagePath": "staticwebassets\\css\\themes\\theme-1.css"
-    },
-    {
-      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\css\\themes\\theme-2.css",
-      "PackagePath": "staticwebassets\\css\\themes\\theme-2.css"
-    },
-    {
-      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\css\\themes\\theme-3.css",
-      "PackagePath": "staticwebassets\\css\\themes\\theme-3.css"
-    },
-    {
-      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\css\\themes\\theme-4.css",
-      "PackagePath": "staticwebassets\\css\\themes\\theme-4.css"
-    },
-    {
-      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\css\\themes\\theme-5.css",
-      "PackagePath": "staticwebassets\\css\\themes\\theme-5.css"
-    },
-    {
-      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\css\\themes\\theme-6.css",
-      "PackagePath": "staticwebassets\\css\\themes\\theme-6.css"
-    },
-    {
       "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
@@ -235,6 +199,22 @@
     {
       "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\fonts\\fontawesome-all.min.css",
       "PackagePath": "staticwebassets\\fonts\\fontawesome-all.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\icon\\fonts\\themify.eot",
+      "PackagePath": "staticwebassets\\icon\\fonts\\themify.eot"
+    },
+    {
+      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\icon\\fonts\\themify.svg",
+      "PackagePath": "staticwebassets\\icon\\fonts\\themify.svg"
+    },
+    {
+      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\icon\\fonts\\themify.ttf",
+      "PackagePath": "staticwebassets\\icon\\fonts\\themify.ttf"
+    },
+    {
+      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\icon\\fonts\\themify.woff",
+      "PackagePath": "staticwebassets\\icon\\fonts\\themify.woff"
     },
     {
       "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\icon\\themify-icons.min.css",
@@ -323,6 +303,10 @@
     {
       "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\js\\popper.min.js",
       "PackagePath": "staticwebassets\\js\\popper.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\js\\sidebar-accordion.js",
+      "PackagePath": "staticwebassets\\js\\sidebar-accordion.js"
     },
     {
       "Id": "C:\\Users\\Tera\\source\\repos\\Project-MBVN\\wwwroot\\js\\site.js",
