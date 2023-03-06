@@ -1,10 +1,12 @@
 ﻿using HospitalManagementSystem.Areas.Admin.Services;
 using HospitalManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalManagementSystem.Areas.Admin.Controllers
 {
+	[Authorize(Roles = "Admin")]
 	public class AppointmentController : Controller
 	{
 		private readonly IDatabaseService _service;

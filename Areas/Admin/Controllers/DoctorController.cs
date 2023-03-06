@@ -1,6 +1,7 @@
 ﻿using HospitalManagementSystem.Areas.Admin.Models;
 using HospitalManagementSystem.Areas.Admin.Services;
 using HospitalManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace HospitalManagementSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class DoctorController : Controller
     {
         private readonly IDatabaseService _service;

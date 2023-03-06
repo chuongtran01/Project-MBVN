@@ -76,7 +76,7 @@ namespace HospitalManagementSystem.Services
 
         public async Task<bool> LogOut()
         {
-            UserLog ul = _context.UserLogs.Where(ul => ul.Uid == Int32.Parse(_httpContextAccessor.HttpContext.Session.GetString("UID"))).FirstOrDefault();
+            UserLog ul = _context.UserLogs.Where(ul => ul.Uid == Int32.Parse(_httpContextAccessor.HttpContext.Session.GetString("UID")) && ul.Status == 1).FirstOrDefault();
             ul.Status = 0;
             _context.SaveChanges();
             _httpContextAccessor.HttpContext.Session.Clear();

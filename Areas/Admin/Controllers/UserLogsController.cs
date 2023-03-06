@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Areas.Admin.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalManagementSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class UserLogsController : Controller
     {
         private readonly IDatabaseService _service;
