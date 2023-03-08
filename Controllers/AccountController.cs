@@ -218,6 +218,60 @@ namespace HospitalManagementSystem.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ContactUs(ContactUsViewModelGuest model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    byte[] b = new byte[] { 10, 12, 12, 12 };
+                    DateTime t = DateTime.Now;
+                    Array.Copy(BitConverter.GetBytes(t.Ticks), 0, b, 0, 4);
+
+                    ContactU newMessage = new ContactU()
+                    {
+                        Fullname = model.Fullname,
+                        Contactno = model.Contactno,
+                        Email = model.Email,
+                        Message = model.Message,
+                        PostingDate = null,
+                        LastUpdation = DateTime.Now
+                    };
+
+                    await _context.ContactUs.AddAsync(newMessage);
+                    await _context.SaveChangesAsync();
+
+                    ViewBag.sender = model.Fullname;
+                    return RedirectToAction("SuccessfullySentMessage", "Account");
+
+                }
+                else
+                {
+                    ViewBag.error = "Something wrong happend. Please try again!";
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.error = ex.InnerException.Message;
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult SuccessfullySentMessage(string sender)
+        {
+            //ViewBag.sender = sender;
+            return View();
+        }
     }
 }
 
