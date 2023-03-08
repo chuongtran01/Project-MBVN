@@ -83,6 +83,70 @@ namespace HospitalManagementSystem.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult AdminLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AdminLoginAsync(LogInViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                //var encryptedPassword = GetMD5(model.Password);
+                //var user = _context.Patients.Where(s => s.EmailAddress.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
+
+                bool success = await _logInService.AdminLogIn(model);
+
+                if (success == true)
+                {
+                    //HttpContext.Session.SetString("UID", patientID);
+                    return RedirectToAction("Index", "Home");
+
+                }
+                else
+                {
+                    ViewBag.error = "Login failed";
+                    return View();
+                }
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult DoctorLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DoctorLoginAsync(LogInViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                //var encryptedPassword = GetMD5(model.Password);
+                //var user = _context.Patients.Where(s => s.EmailAddress.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
+
+                bool success = await _logInService.DoctorLogIn(model);
+
+                if (success == true)
+                {
+                    //HttpContext.Session.SetString("UID", patientID);
+                    return RedirectToAction("Index", "Home");
+
+                }
+                else
+                {
+                    ViewBag.error = "Login failed";
+                    return View();
+                }
+            }
+            return View();
+        }
+
         public ActionResult Logout()
         {
             _logInService.LogOut();
@@ -123,8 +187,80 @@ namespace HospitalManagementSystem.Controllers
                 ModelState.AddModelError("New Error", "Invalid Data");
                 return View();
             }
-
         }
+
+        [HttpGet]
+        public IActionResult AdminSignUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AdminSignUp(SignUpViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!_logInService.ConfirmPassword(model))
+                {
+                    ViewBag.error = "Confirmed password does not match";
+                    return View();
+                }
+
+                bool checkSignUp = await _logInService.AdminSignUp(model);
+
+                if (checkSignUp)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.error = "Email already exists";
+                    return View();
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("New Error", "Invalid Data");
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult DoctorSignUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DoctorSignUp(SignUpViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!_logInService.ConfirmPassword(model))
+                {
+                    ViewBag.error = "Confirmed password does not match";
+                    return View();
+                }
+
+                bool checkSignUp = await _logInService.DoctorSignUp(model);
+
+                if (checkSignUp)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.error = "Email already exists";
+                    return View();
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("New Error", "Invalid Data");
+                return View();
+            }
+        }
+
         [AllowAnonymous, HttpGet("forgot-password")]
         public IActionResult ForgotPassword()
         {

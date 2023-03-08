@@ -45,7 +45,7 @@ namespace HospitalManagementSystem.Models
             modelBuilder.Entity<Admin>(entity =>
             {
                 entity.Property(e => e.AdminId)
-                    .ValueGeneratedNever()
+                    //.ValueGeneratedNever()
                     .HasColumnName("AdminID");
 
                 entity.Property(e => e.Birthday).HasColumnType("date");

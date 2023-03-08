@@ -63,6 +63,43 @@ namespace HospitalManagementSystem.Services
             }
         }
 
+        public async Task<bool> AdminLogIn(LogInViewModel model)
+        {
+            string encryptedPassword = getEncryptedPassword(model.Password);
+
+            //var user = _context.Patients.Where(s => s.EmailAddress.Equals(emailAddress) && s.Password.Equals(Encrypted)).FirstOrDefault();
+            var user = _context.Admins.Where(s => s.Email.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
+
+            if (user != null)
+            {
+                _httpContextAccessor.HttpContext.Session.SetString("UID", user.AdminId.ToString());
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DoctorLogIn(LogInViewModel model)
+        {
+            string encryptedPassword = getEncryptedPassword(model.Password);
+
+            //var user = _context.Patients.Where(s => s.EmailAddress.Equals(emailAddress) && s.Password.Equals(Encrypted)).FirstOrDefault();
+            var user = _context.Doctors.Where(s => s.EmailAddress.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
+
+            if (user != null)
+            {
+                _httpContextAccessor.HttpContext.Session.SetString("UID", user.DoctorId.ToString());
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool LogOut()
         {
             _httpContextAccessor.HttpContext.Session.Remove("UID");
@@ -98,6 +135,48 @@ namespace HospitalManagementSystem.Services
                 _context.Patients.AddAsync(newUser);
                 await _context.SaveChangesAsync();
                 _httpContextAccessor.HttpContext.Session.SetString("UID", newUser.PatientId.ToString());
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> AdminSignUp(SignUpViewModel model)
+        {
+            var check = _context.Admins.Where(s => s.Email == model.EmailAddress).FirstOrDefault();
+
+            if (check == null)
+            {
+                Admin newUser = new Admin()
+                {
+
+                    Email = model.EmailAddress,
+                    Password = getEncryptedPassword(model.Password),
+                };
+
+                _context.Admins.AddAsync(newUser);
+                await _context.SaveChangesAsync();
+                _httpContextAccessor.HttpContext.Session.SetString("UID", newUser.AdminId.ToString());
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> DoctorSignUp(SignUpViewModel model)
+        {
+            var check = _context.Doctors.Where(s => s.EmailAddress == model.EmailAddress).FirstOrDefault();
+
+            if (check == null)
+            {
+                Doctor newUser = new Doctor()
+                {
+
+                    EmailAddress = model.EmailAddress,
+                    Password = getEncryptedPassword(model.Password),
+                };
+
+                _context.Doctors.AddAsync(newUser);
+                await _context.SaveChangesAsync();
+                _httpContextAccessor.HttpContext.Session.SetString("UID", newUser.DoctorId.ToString());
                 return true;
             }
             return false;
