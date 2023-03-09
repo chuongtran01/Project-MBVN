@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HospitalManagementSystem.Models;
-using HospitalManagementSystem.Areas.Admin.Services;
 using Microsoft.AspNetCore.Authorization;
+using HospitalManagementSystem.Services;
 
 namespace HospitalManagementSystem.Areas.Admin.Controllers
 {

@@ -34,16 +34,12 @@ namespace HospitalManagementSystem.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly MBVNContext _context;
         private readonly IAccountService _accountService;
-        private readonly ILogInService _logInService;
-        private readonly IManageProfile _manageProfile;
 
-        public AccountController(IHttpContextAccessor httpContextAccessor, MBVNContext context, IAccountService accountService, ILogInService logInService, IManageProfile manageProfile)
+        public AccountController(IHttpContextAccessor httpContextAccessor, MBVNContext context, IAccountService accountService)
         {
             _httpContextAccessor = httpContextAccessor;
             _context = context;
             _accountService = accountService;
-            _logInService = logInService;
-            _manageProfile = manageProfile;
         }
         // GET: /<controller>/
         public IActionResult Index()
@@ -66,7 +62,7 @@ namespace HospitalManagementSystem.Controllers
                 //var encryptedPassword = GetMD5(model.Password);
                 //var user = _context.Patients.Where(s => s.EmailAddress.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
 
-                bool success = await _logInService.LogIn(model);
+                bool success = await _accountService.LogIn(model);
 
                 if (success == true)
                 {
@@ -85,7 +81,7 @@ namespace HospitalManagementSystem.Controllers
 
         public ActionResult Logout()
         {
-            _logInService.LogOut();
+            _accountService.LogOut();
             return RedirectToAction("Index", "Home");
         }
 
@@ -100,13 +96,13 @@ namespace HospitalManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!_logInService.ConfirmPassword(model))
+                if (!_accountService.ConfirmPassword(model))
                 {
                     ViewBag.error = "Confirmed password does not match";
                     return View();
                 }
 
-                bool checkSignUp = await _logInService.SignUp(model);
+                bool checkSignUp = await _accountService.SignUp(model);
 
                 if (checkSignUp)
                 {
