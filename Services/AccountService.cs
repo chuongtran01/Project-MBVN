@@ -92,12 +92,12 @@ namespace HospitalManagementSystem.Services
         {
             string encryptedPassword = getEncryptedPassword(model.Password);
 
-            //var user = _context.Patients.Where(s => s.EmailAddress.Equals(emailAddress) && s.Password.Equals(Encrypted)).FirstOrDefault();
             var user = _context.Patients.Where(s => s.EmailAddress.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
 
             if (user != null)
             {
                 _httpContextAccessor.HttpContext.Session.SetString("UID", user.PatientId.ToString());
+                _httpContextAccessor.HttpContext.Session.SetString("Role", "Patient");
                 long bNow = DateTime.Now.ToBinary();
                 byte[] arrayNow = BitConverter.GetBytes(bNow);
                 UserLog userLog = new()
@@ -116,11 +116,74 @@ namespace HospitalManagementSystem.Services
                 return false;
             }
         }
+        public async Task<bool> AdminLogIn(LogInViewModel model)
+        {
+            string encryptedPassword = getEncryptedPassword(model.Password);
 
+            var user = _context.Admins.Where(s => s.Email.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
+
+            if (user != null)
+            {
+                _httpContextAccessor.HttpContext.Session.SetString("UID", user.AdminId.ToString());
+                _httpContextAccessor.HttpContext.Session.SetString("Role", "Admin");
+                long bNow = DateTime.Now.ToBinary();
+                byte[] arrayNow = BitConverter.GetBytes(bNow);
+                UserLog userLog = new()
+                {
+                    Uid = user.AdminId,
+                    Username = user.Username,
+                    LoginTime = arrayNow,
+                    Status = 1
+                };
+                await _context.AddAsync(userLog);
+                _context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DoctorLogIn(LogInViewModel model)
+        {
+            string encryptedPassword = getEncryptedPassword(model.Password);
+
+            //var user = _context.Patients.Where(s => s.EmailAddress.Equals(emailAddress) && s.Password.Equals(Encrypted)).FirstOrDefault();
+            var user = _context.Doctors.Where(s => s.EmailAddress.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
+
+            if (user != null)
+            {
+                _httpContextAccessor.HttpContext.Session.SetString("UID", user.DoctorId.ToString());
+                _httpContextAccessor.HttpContext.Session.SetString("Role", "Doctor");
+                long bNow = DateTime.Now.ToBinary();
+                byte[] arrayNow = BitConverter.GetBytes(bNow);
+                DoctorsLog doctorLog = new()
+                {
+                    Uid = user.DoctorId,
+                    Username = user.EmailAddress,
+                    LoginTime = arrayNow,
+                };
+                await _context.AddAsync(doctorLog);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public async Task<bool> LogOut()
         {
-            UserLog ul = _context.UserLogs.Where(ul => ul.Uid == Int32.Parse(_httpContextAccessor.HttpContext.Session.GetString("UID")) && ul.Status == 1).FirstOrDefault();
-            ul.Status = 0;
+            var role = _httpContextAccessor.HttpContext.Session.GetString("Role");
+            switch (role)
+            {
+                case "Patient":
+                    UserLog ul = _context.UserLogs.Where(ul => ul.Uid == Int32.Parse(_httpContextAccessor.HttpContext.Session.GetString("UID"))).FirstOrDefault();
+                    break;
+                case "Doctor":
+                    DoctorsLog dl = _context.DoctorsLogs.Where(dl => dl.Uid == Int32.Parse(_httpContextAccessor.HttpContext.Session.GetString("UID"))).FirstOrDefault();
+                    break;
+            }
             _context.SaveChanges();
             _httpContextAccessor.HttpContext.Session.Clear();
             if (_httpContextAccessor.HttpContext.Session.GetString("UID") == null)

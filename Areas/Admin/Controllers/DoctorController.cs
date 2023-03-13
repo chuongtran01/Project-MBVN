@@ -8,8 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HospitalManagementSystem.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class DoctorController : Controller
+    public class DoctorController : AdminController
     {
         private readonly IDatabaseService _service;
         public DoctorController(IDatabaseService service)

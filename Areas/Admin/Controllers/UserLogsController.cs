@@ -11,9 +11,7 @@ using HospitalManagementSystem.Services;
 
 namespace HospitalManagementSystem.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
-    public class UserLogsController : Controller
+    public class UserLogsController : AdminController
     {
         private readonly IDatabaseService _service;
 

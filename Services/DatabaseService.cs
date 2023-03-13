@@ -98,6 +98,7 @@ namespace HospitalManagementSystem.Services
             }
             try
             {
+                var encryptedPassword = Utils.Password.getMD5(model.Password);
                 Doctor newDoctor = new()
                 {
                     Name = model.Name,
@@ -107,7 +108,7 @@ namespace HospitalManagementSystem.Services
                     EmailAddress = model.EmailAddress,
                     PhoneNumber = model.PhoneNumber,
                     DepartmentId = model.DepartmentId,
-                    Password = model.Password,
+                    Password = encryptedPassword,
                 };
                 await _context.AddAsync(newDoctor);
                 _context.SaveChanges();
@@ -141,6 +142,10 @@ namespace HospitalManagementSystem.Services
         public async Task<List<UserLog>> GetUserLog()
         {
             return await _context.UserLogs.ToListAsync();
+        }
+        public async Task<List<DoctorsLog>> GetDoctorLog()
+        {
+            return await _context.DoctorsLogs.ToListAsync();
         }
 
         // CONTACT US QUERY

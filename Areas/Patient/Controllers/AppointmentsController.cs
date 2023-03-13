@@ -10,8 +10,7 @@ using HospitalManagementSystem.Services;
 
 namespace HospitalManagementSystem.Areas.Patient.Controllers
 {
-    [Area("Patient")]
-    public class AppointmentsController : Controller
+    public class AppointmentsController : PatientController
     {
         private readonly IDatabaseService _databaseService;
         private readonly IAccountService _accountService;

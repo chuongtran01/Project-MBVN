@@ -50,6 +50,11 @@ namespace HospitalManagementSystem.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            string role = _httpContextAccessor.HttpContext.Session.GetString("Role");
+            if(role != null)
+            {
+                return RedirectToAction("Index", "Home", new { area=role });
+            }
             return View();
         }
 
@@ -67,7 +72,43 @@ namespace HospitalManagementSystem.Controllers
                 if (success == true)
                 {
                     //HttpContext.Session.SetString("UID", patientID);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", new {area="Patient"});
+
+                }
+                else
+                {
+                    ViewBag.error = "Login failed";
+                    return View();
+                }
+            }
+            return View();
+        }
+        [HttpGet]
+        public IActionResult AdminLogin()
+        {
+            string role = _httpContextAccessor.HttpContext.Session.GetString("Role");
+            if (role != null)
+            {
+                return RedirectToAction("Index", "Home", new { area = role });
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AdminLoginAsync(LogInViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                //var encryptedPassword = GetMD5(model.Password);
+                //var user = _context.Patients.Where(s => s.EmailAddress.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
+
+                bool success = await _accountService.AdminLogIn(model);
+
+                if (success == true)
+                {
+                    //HttpContext.Session.SetString("UID", patientID);
+                    return RedirectToAction("Index", "Home", new {area="Admin"});
 
                 }
                 else
@@ -79,6 +120,42 @@ namespace HospitalManagementSystem.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult DoctorLogin()
+        {
+            string role = _httpContextAccessor.HttpContext.Session.GetString("Role");
+            if (role != null)
+            {
+                return RedirectToAction("Index", "Home", new { area = role });
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DoctorLoginAsync(LogInViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                //var encryptedPassword = GetMD5(model.Password);
+                //var user = _context.Patients.Where(s => s.EmailAddress.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
+
+                bool success = await _accountService.DoctorLogIn(model);
+
+                if (success == true)
+                {
+                    //HttpContext.Session.SetString("UID", patientID);
+                    return RedirectToAction("Index", "Home", new {area="Doctor"});
+
+                }
+                else
+                {
+                    ViewBag.error = "Login failed";
+                    return View();
+                }
+            }
+            return View();
+        }
         public ActionResult Logout()
         {
             _accountService.LogOut();

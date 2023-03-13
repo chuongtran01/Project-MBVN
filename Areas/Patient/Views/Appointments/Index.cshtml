@@ -31,9 +31,10 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+            string patient = item.Patient.Firstname ?? item.Patient.EmailAddress;
+            <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DoctorSpecilization)
+                @Html.DisplayFor(modelItem => item.Doctor.Field)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AppointmentDate)
@@ -45,12 +46,10 @@
                 @Html.DisplayFor(modelItem => item.Doctor.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Patient.Firstname)
+                @patient
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.AppointmentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AppointmentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AppointmentId">Delete</a>
+                @Html.ActionLink("Details", "Details","Appointments", item.AppointmentId)
             </td>
         </tr>
 }

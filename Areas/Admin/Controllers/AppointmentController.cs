@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalManagementSystem.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-	public class AppointmentController : Controller
-	{
+	public class AppointmentController : AdminController
+    {
 		private readonly IDatabaseService _service;
 		public AppointmentController(IDatabaseService service)
 		{

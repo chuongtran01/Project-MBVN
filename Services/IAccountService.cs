@@ -5,7 +5,9 @@ namespace HospitalManagementSystem.Services
 {
     public interface IAccountService
     {
+        Task<bool> AdminLogIn(LogInViewModel model);
         bool ConfirmPassword(SignUpViewModel model);
+        Task<bool> DoctorLogIn(LogInViewModel model);
         Task<bool> editProfile(ManageProfileViewModel model);
         Task<int?> GetCurrentPatientUser();
         string getEncryptedPassword(string password);

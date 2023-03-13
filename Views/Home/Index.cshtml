@@ -25,7 +25,7 @@
 
                         <img src="~/images/doctor.jpg" alt="">
                             <h6>Doctors login</h6>
-                            <a class="btn btn-success btn-sm" asp-area="" asp-controller="Account" asp-action="Login">
+                            <a class="btn btn-success btn-sm" asp-area="" asp-controller="Account" asp-action="DoctorLogin">
                                 Click Here
                             </a>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="col-sm-4 blog-smk">
                         <img src="~/images/admin.jpg" alt="">
                             <h6>Admin Login</h6>
-                            <a class="btn btn-success btn-sm" asp-area="" asp-controller="Account" asp-action="Login">
+                            <a class="btn btn-success btn-sm" asp-area="" asp-controller="Account" asp-action="AdminLogin">
                                 Click Here
                             </a>
                 </div>
@@ -42,7 +42,7 @@
         <div class="row no-margin">
             <div class="col-sm-12">
                 <h3>About Our Hospital</h3>
-                <p>@Model.Firstname</p>
+                <p>@ViewBag.AboutUs</p>
             </div>
         </div>
 

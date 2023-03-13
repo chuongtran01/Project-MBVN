@@ -13,9 +13,8 @@ using PagedList.Core;
 
 namespace HospitalManagementSystem.Areas.Admin.Controllers
 {
-	[Area("Admin")]
-    public class HomeController : Controller
-	{
+    public class HomeController : AdminController
+    {
 
 		public HomeController()
 		{

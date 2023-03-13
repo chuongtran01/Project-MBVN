@@ -2,8 +2,7 @@
 
 namespace HospitalManagementSystem.Areas.Patient.Controllers
 {
-    [Area("Patient")]
-    public class HomeController : Controller
+    public class HomeController : PatientController
     {
         public IActionResult Index()
         {

@@ -34,6 +34,9 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Home\" />
+    <Folder Include="Areas\Doctor\Controllers\" />
+    <Folder Include="Areas\Doctor\Data\" />
+    <Folder Include="Areas\Doctor\Models\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Services\" />
     <Folder Include="Areas\Admin\Views\Specialization\" />
