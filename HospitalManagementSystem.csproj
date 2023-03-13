@@ -34,9 +34,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Home\" />
-    <Folder Include="Areas\Doctor\Controllers\" />
     <Folder Include="Areas\Doctor\Data\" />
-    <Folder Include="Areas\Doctor\Models\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Services\" />
     <Folder Include="Areas\Admin\Views\Specialization\" />
@@ -63,5 +61,11 @@
     <PackageReference Include="Syncfusion.EJ2.JavaScript" Version="20.4.0.52" />
     <PackageReference Include="Syncfusion.EJ2.MVC5" Version="20.4.0.52" />
     <PackageReference Include="Syncfusion.Licensing" Version="20.4.0.52" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Areas\Doctor\Views\Shared\_Sidebar.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 </Project>

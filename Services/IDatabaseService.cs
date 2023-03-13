@@ -20,5 +20,10 @@ namespace HospitalManagementSystem.Services
         Task<bool> BookAppointment(Appointment model);
         SelectList GetDoctorDropdown();
         Task<List<DoctorsLog>> GetDoctorLog();
+        Task<List<Patient>> GetPatientsWithAppointments();
+        Task<Patient> GetPatient(int id);
+        Task<List<Prescription>> GetPrescriptions(int patientId);
+        SelectList GetMedicineDropdown();
+        Task<bool> AddPrescription(Prescription p);
     }
 }

@@ -9,7 +9,7 @@ namespace HospitalManagementSystem.Services
         bool ConfirmPassword(SignUpViewModel model);
         Task<bool> DoctorLogIn(LogInViewModel model);
         Task<bool> editProfile(ManageProfileViewModel model);
-        Task<int?> GetCurrentPatientUser();
+        int? GetCurrentUser();
         string getEncryptedPassword(string password);
         Task<ManageProfileViewModel> getPatient();
         Task<bool> LogIn(LogInViewModel model);

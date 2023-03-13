@@ -71,7 +71,6 @@ namespace HospitalManagementSystem.Controllers
 
                 if (success == true)
                 {
-                    HttpContext.Session.SetString("UID", patientID);
                     return RedirectToAction("Index", "Home", new {area="Patient"});
 
                 }
