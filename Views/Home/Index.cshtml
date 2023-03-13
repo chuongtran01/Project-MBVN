@@ -1,67 +1,50 @@
-﻿@{
+﻿@model HospitalManagementSystem.Models.Patient
+@{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title> Hospital management System </title>
 </head>
 
-<section id="logins" class="our-blog container-fluid">
+<section id="logins" class="container-fluid">
     <div class="container">
-        <div class="inner-title">
-
             <h2>Logins</h2>
-        </div>
-        <div class="col-sm-12 blog-cont">
+        <div class="col-sm-12">
             <div class="row no-margin">
                 <div class="col-sm-4 blog-smk">
-                    <div class="blog-single">
-
                         <img src="~/images/patient.jpg" alt="">
-
-                        <div class="blog-single-det">
                             <h6>Patient Login</h6>
                             <a class="btn btn-success btn-sm" asp-area="" asp-controller="Account" asp-action="Login">
                                 Click Here
                             </a>
-
-                        </div>
-                    </div>
                 </div>
                 <div class="col-sm-4 blog-smk">
-                    <div class="blog-single">
 
                         <img src="~/images/doctor.jpg" alt="">
-
-                        <div class="blog-single-det">
                             <h6>Doctors login</h6>
-                            <a class="btn btn-success btn-sm" asp-area="" asp-controller="Account" asp-action="Login">
+                            <a class="btn btn-success btn-sm" asp-area="" asp-controller="Account" asp-action="DoctorLogin">
                                 Click Here
                             </a>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="col-sm-4 blog-smk">
-                    <div class="blog-single">
-
                         <img src="~/images/admin.jpg" alt="">
-
-                        <div class="blog-single-det">
                             <h6>Admin Login</h6>
-
-                            <a class="btn btn-success btn-sm" asp-area="" asp-controller="Account" asp-action="Login">
+                            <a class="btn btn-success btn-sm" asp-area="" asp-controller="Account" asp-action="AdminLogin">
                                 Click Here
                             </a>
-                        </div>
-                    </div>
                 </div>
+            </div>
+        </div>
+        <div class="row no-margin">
+            <div class="col-sm-12">
+                <h3>About Our Hospital</h3>
+                <p>@ViewBag.AboutUs</p>
             </div>
         </div>
 
     </div>
 </section>
-</html>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PagedList.Core;
@@ -12,14 +13,11 @@ using PagedList.Core;
 
 namespace HospitalManagementSystem.Areas.Admin.Controllers
 {
-	[Area("Admin")]
-	public class HomeController : Controller
-	{
-		private readonly MBVNContext _context;
+    public class HomeController : AdminController
+    {
 
-		public HomeController(MBVNContext context)
+		public HomeController()
 		{
-			_context = context;
 		}
 		// GET: /<controller>/
 		public IActionResult Index()

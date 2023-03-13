@@ -32,33 +32,36 @@
     <None Remove="Areas\Admin\Views\Specialization\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\" />
-    <Folder Include="Areas\Admin\" />
-    <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Admin\Views\Home\" />
+    <Folder Include="Areas\Doctor\Controllers\" />
+    <Folder Include="Areas\Doctor\Data\" />
+    <Folder Include="Areas\Doctor\Models\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Services\" />
     <Folder Include="Areas\Admin\Views\Specialization\" />
+    <Folder Include="wwwroot\js\NewFolder\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.13" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.13">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.14">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.13" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.14" />
     <PackageReference Include="PagedList.Core.Mvc" Version="3.0.0" />
     <PackageReference Include="AspNetCoreHero.ToastNotification" Version="1.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.14" />
     <PackageReference Include="bootstrap" Version="5.2.3" />
     <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Syncfusion.EJ2.JavaScript" Version="20.4.0.52" />
+    <PackageReference Include="Syncfusion.EJ2.MVC5" Version="20.4.0.52" />
+    <PackageReference Include="Syncfusion.Licensing" Version="20.4.0.52" />
   </ItemGroup>
 </Project>

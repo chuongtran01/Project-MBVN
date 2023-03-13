@@ -1,0 +1,52 @@
+﻿@model HospitalManagementSystem.Models.Appointment
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Patient/Views/Shared/_Layout.cshtml";
+    List<string> time = new() { "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00"};
+}
+
+<h1>Create</h1>
+
+<h4>Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @{using (Html.BeginForm("Create", "Appointments"))
+            {
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    Select Date
+                    @Html.TextBoxFor(m=>m.AppointmentDate, new {@class = "form-control", @type="date"})
+                </div>
+                <div class="form-group">
+                    Select Time <br />
+                    @foreach (var t in time)
+                    {
+                        <div class="form-check form-check-inline">
+                            @Html.RadioButtonFor(m=>m.AppontmentTime, t)
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                @t
+                            </label>
+                        </div>
+                    }
+                </div>
+                <div class="form-group">
+                    Select Doctor <br />
+                    @Html.DropDownListFor(m=>m.DoctorId, (IEnumerable<SelectListItem>)ViewData["DoctorId"], "Select Doctor")
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

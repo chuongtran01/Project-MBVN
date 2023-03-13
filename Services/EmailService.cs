@@ -24,7 +24,21 @@ public class EmailService : IEmailService
 		}
         catch (Exception ex)
         {
-
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
+    public async Task<bool> SendReplyEmail(UserEmailOptions userEmailOptions)
+    {
+        try
+        {
+            userEmailOptions.Subject = UpdatePlaceHolders("Reply to {{fullname}}'s query", userEmailOptions.PlaceHolders);
+            userEmailOptions.Body = UpdatePlaceHolders(GetEmail("ReplyQueryEmail"), userEmailOptions.PlaceHolders);
+            await SendEmail(userEmailOptions);
+            return true;
+        }
+        catch (Exception ex)
+        {
             return false;
         }
     }
