@@ -12,17 +12,17 @@ namespace HospitalManagementSystem.Services
         public DatabaseService(MBVNContext context, IAccountService accountService)
         {
             _context = context;
-            _accountService = accountService;   
+            _accountService = accountService;
         }
         // APPOINTMENT
         public async Task<List<Appointment>> GetAllAppointments()
         {
-            var curUser = await _accountService.GetCurrentPatientUser();
-            if(curUser == null )
+            var curUser = _accountService.GetCurrentUser();
+            if (curUser == null)
             {
                 return null;
             }
-            var mBVNContext = _context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).Where(a => a.PatientId==curUser);
+            var mBVNContext = _context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).Where(a => a.PatientId == curUser);
             return await mBVNContext.ToListAsync();
         }
         public async Task<Appointment> GetAppointment(int? appointmentId)
@@ -37,7 +37,7 @@ namespace HospitalManagementSystem.Services
             try
             {
                 Doctor doctor = await _context.Doctors.FindAsync(model.DoctorId);
-                Patient patient = await _context.Patients.FindAsync(await _accountService.GetCurrentPatientUser());
+                Patient patient = await _context.Patients.FindAsync(_accountService.GetCurrentUser());
                 model.Doctor = doctor;
                 model.Patient = patient;
                 _context.Add(model);
@@ -137,6 +137,46 @@ namespace HospitalManagementSystem.Services
                 Console.WriteLine(ex.Message);
                 return false;
             }
+        }
+        // PATIENT
+        public async Task<List<Patient>> GetPatientsWithAppointments()
+        {
+            int doctorId = _accountService.GetCurrentUser().Value;
+            var patientsWithAppointments = await _context.Appointments
+                .Include(a => a.Patient)
+                .Where(a => a.DoctorId == doctorId)
+                .Select(a => a.Patient)
+                .ToListAsync();
+
+            return patientsWithAppointments;
+        }
+        public async Task<Patient> GetPatient(int id)
+        {
+            var patient = await _context.Patients.FirstOrDefaultAsync(m => m.PatientId == id);
+            return patient;
+        }
+        public async Task<List<Prescription>> GetPrescriptions(int patientId)
+        {
+            var prescriptions = await _context.Prescriptions
+                .Include(p => p.Patient)
+                .Include(p => p.Medicine)
+                .Where(p => p.PatientId == patientId)
+                .ToListAsync();
+            return prescriptions;
+        }
+        public SelectList GetMedicineDropdown()
+        {
+            return new SelectList(_context.Medicines, "MedicineId", "Name");
+        }
+        public async Task<bool> AddPrescription(Prescription p)
+        {
+            int doctorId = _accountService.GetCurrentUser().Value;
+            Medicine m = await _context.Medicines.FirstOrDefaultAsync(m=>m.MedicineId == p.MedicineId);
+            p.Medicine = m;
+            p.DoctorId = doctorId;
+            await _context.AddAsync(p);
+            _context.SaveChanges();
+            return true;
         }
         // USER LOG
         public async Task<List<UserLog>> GetUserLog()

@@ -51,7 +51,7 @@ namespace HospitalManagementSystem.Services
             }
             return false;
         }
-        public async Task<int?> GetCurrentPatientUser()
+        public int? GetCurrentUser()
         {
             var curUserId = Int32.Parse(_httpContextAccessor.HttpContext.Session.GetString("UID"));
 

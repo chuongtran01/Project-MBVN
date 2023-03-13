@@ -48,7 +48,7 @@ namespace HospitalManagementSystem.Areas.Patient.Controllers
         public IActionResult Create()
         {
             ViewData["DoctorId"] = _databaseService.GetDoctorDropdown();
-            ViewData["PatientId"] = _accountService.GetCurrentPatientUser();
+            ViewData["PatientId"] = _accountService.GetCurrentUser();
             return View();
         }
 

@@ -17,19 +17,19 @@ namespace HospitalManagementSystem.Areas.Admin.Controllers
         }
         public async Task<ViewResult> Index()
         {
-            List<Doctor> doctors = await _service.GetAllDoctor();
+            List<HospitalManagementSystem.Models.Doctor> doctors = await _service.GetAllDoctor();
             return View(doctors);
         }
 
         public async Task<ViewResult> Details(int id)
         {
-            Doctor model = await _service.GetDoctor(id);
+            HospitalManagementSystem.Models.Doctor model = await _service.GetDoctor(id);
             return View(model);
         }
         [HttpGet]
         public async Task<ViewResult> Edit(int id)
         {
-            Doctor doctor = await _service.GetDoctor(id);
+            HospitalManagementSystem.Models.Doctor doctor = await _service.GetDoctor(id);
             return View(doctor);
         }
         [HttpPost]
