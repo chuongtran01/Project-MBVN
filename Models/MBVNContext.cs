@@ -342,7 +342,6 @@ namespace HospitalManagementSystem.Models
                 entity.ToTable("UserLog");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
                     .HasColumnName("ID");
 
                 entity.Property(e => e.LoginTime)

@@ -1,7 +1,6 @@
 ﻿@model LogInViewModel
 
 @{
-    ViewBag.Title = "Doctor Login";
 }
 
 <!DOCTYPE html>
@@ -23,7 +22,7 @@
             </div>
 
             <div class="box-login">
-                @using (Html.BeginForm("AdminLogin", "Account", FormMethod.Post))
+                @using (Html.BeginForm("DoctorLogin", "Account", FormMethod.Post))
                 {
                     <fieldset>
                         <legend>
@@ -50,11 +49,6 @@
                             </a>
                         </div>
                         <div class="form-group error">
-                            @if (@ViewBag.error != null)
-                            {
-
-                                <label style="color:red;"> @ViewBag.error</label>
-                            }
                         </div>
                         <div class="form-actions">
 

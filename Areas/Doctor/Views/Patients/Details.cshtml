@@ -1,0 +1,90 @@
+﻿@model HospitalManagementSystem.Areas.Doctor.Models.PatientViewModel
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Doctor/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Patient</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Patient.Firstname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Patient.Firstname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Patient.Lastname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Patient.Lastname)
+        </dd>
+        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Patient.EmailAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Patient.EmailAddress)
+        </dd>
+       
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Patient.PhotoImage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Patient.PhotoImage)
+        </dd>
+    </dl>
+    <div>
+        <h3>Prescriptions</h3>
+        <div class="prescription-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Medicine Name</th>
+                        <th>Dosage</th>
+                        <th>Frequency</th>
+                        <th>Start</th>
+                        <th>End</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var prescription in Model.Prescriptions)
+                    {
+                        <tr>
+                            <td>@prescription.Medicine.Name</td>
+                            <td>@prescription.Dosage</td>
+                            <td>@prescription.Frequency</td>
+                            <td>@prescription.StartDate</td>
+                            <td>@prescription.EndDate</td>
+                        </tr>
+                    }
+                    @using (Html.BeginForm("AddPrescription", "Patients", FormMethod.Post, new { @class = "prescription-form" }))
+                    {
+                        @Html.HiddenFor(m=>m.Patient.PatientId)
+                        @Html.AntiForgeryToken()
+                        <td class="form-group">
+                            @Html.DropDownListFor(m=>m.NewPrescription.MedicineId, (IEnumerable<SelectListItem>)ViewData["MedicineId"], "Select Medicine")
+                        </td>
+                        <td class="form-group">
+                            @Html.TextBoxFor(m=>m.NewPrescription.Dosage, new {@class="form-control"})
+                        </td>
+                        <td class="form-group">
+                            @Html.TextBoxFor(m=>m.NewPrescription.Frequency, new {@class="form-control"})
+                        </td>
+                        <td class="form-group">
+                            @Html.TextBoxFor(m=>m.NewPrescription.StartDate, new {@type="date", @class="form-control"})
+                        </td>
+                        <td class="form-group">
+                            @Html.TextBoxFor(m=>m.NewPrescription.EndDate, new {@type="date", @class="form-control"})
+                        </td>
+                        <button type="submit">Add</button>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

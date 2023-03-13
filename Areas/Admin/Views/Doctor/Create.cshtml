@@ -1,0 +1,56 @@
+﻿@model HospitalManagementSystem.Models.Doctor
+
+<h4>Doctor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.Name)
+                @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.Gender)
+                @Html.TextBoxFor(m => m.Gender, new {@class = "form-control"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.Field)
+                @Html.TextBoxFor(m => m.Field, new {@class = "form-control"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.Birthday)
+                @Html.TextBoxFor(m => m.Birthday, new {@class = "form-control datepicker", @type = "date"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.EmailAddress)
+                @Html.TextBoxFor(m => m.EmailAddress, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.EmailAddress, null, new {@class = "text-danger"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.Password)
+                @Html.TextBoxFor(m => m.Password, new {@class = "form-control", @type = "password"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.PhoneNumber)
+                @Html.TextBoxFor(m => m.PhoneNumber, new {@class = "form-control", @type = "tel" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "text-danger"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.DepartmentId)
+                @Html.TextBoxFor(m => m.DepartmentId, new {@class = "form-control"})
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

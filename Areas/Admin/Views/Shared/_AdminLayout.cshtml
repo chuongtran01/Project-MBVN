@@ -5,52 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HospitalManagementSystem</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HospitalManagementSystem.styles.css" asp-append-version="true" />
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/fonts/fontawesome-all.min.css>s
+	<link rel="stylesheet" href="~/icon/themify-icons.min.css">
+	<link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HospitalManagementSystem</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="ViewDoctor">Manage Doctor</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Department" asp-action="Index">Department</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Patient" asp-action="Index">Patients</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
+	<header>
+		@Html.Partial("_Sidebar")
+		<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+			<div class="container-fluid">
+				@Html.ActionLink("Hospital Management System", "Index", "Home", null, new {area="", @class="navbar-brand"})
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				</ul>
+				<div class="d-flex">
+					<div class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Account
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li class="dropdown-item">
+								Profile
+							</li>
+							<li><a class="dropdown-item" href="#">Settings</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li class="dropdown-item">
+								@Html.ActionLink("Log out", "Logout", "Account", new{area=""})
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<div class="app-content">
+			<div class="main-content">
+				<div class="wrap-content container" id="container">
+					@RenderBody()
+				</div>
+			</div>
+		</div>
+	</header>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - HospitalManagementSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            copy; 2023 - HospitalManagementSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-cookie/jquery.cookie.js"></script>

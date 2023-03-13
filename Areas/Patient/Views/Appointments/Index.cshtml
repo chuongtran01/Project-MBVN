@@ -1,0 +1,57 @@
+﻿@model IEnumerable<HospitalManagementSystem.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Patient/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+@Html.ActionLink("Book an appointment", "Create")
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorSpecilization)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppontmentTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Doctor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patient)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            string patient = item.Patient.Firstname ?? item.Patient.EmailAddress;
+            <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.Field)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppontmentTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.Name)
+            </td>
+            <td>
+                @patient
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details","Appointments", item.AppointmentId)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
