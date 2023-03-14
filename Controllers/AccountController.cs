@@ -35,10 +35,8 @@ namespace HospitalManagementSystem.Controllers
         private readonly MBVNContext _context;
         private readonly IAccountService _accountService;
 
-        private readonly ILogInService _logInService;
         //private readonly IManageProfile _manageProfile;
 
-        public AccountController(IHttpContextAccessor httpContextAccessor, MBVNContext context, IAccountService accountService, ILogInService logInService)
 
 
         public AccountController(IHttpContextAccessor httpContextAccessor, MBVNContext context, IAccountService accountService)
@@ -218,35 +216,35 @@ namespace HospitalManagementSystem.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AdminSignUp(SignUpViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                if (!_logInService.ConfirmPassword(model))
-                {
-                    ViewBag.error = "Confirmed password does not match";
-                    return View();
-                }
+        //[HttpPost]
+        //public async Task<IActionResult> AdminSignUp(SignUpViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (!_logInService.ConfirmPassword(model))
+        //        {
+        //            ViewBag.error = "Confirmed password does not match";
+        //            return View();
+        //        }
 
-                bool checkSignUp = await _logInService.AdminSignUp(model);
+        //        bool checkSignUp = await _logInService.AdminSignUp(model);
 
-                if (checkSignUp)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ViewBag.error = "Email already exists";
-                    return View();
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("New Error", "Invalid Data");
-                return View();
-            }
-        }
+        //        if (checkSignUp)
+        //        {
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //        else
+        //        {
+        //            ViewBag.error = "Email already exists";
+        //            return View();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ModelState.AddModelError("New Error", "Invalid Data");
+        //        return View();
+        //    }
+        //}
 
         [HttpGet]
         public IActionResult DoctorSignUp()
@@ -254,35 +252,35 @@ namespace HospitalManagementSystem.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> DoctorSignUp(SignUpViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                if (!_logInService.ConfirmPassword(model))
-                {
-                    ViewBag.error = "Confirmed password does not match";
-                    return View();
-                }
+        //[HttpPost]
+        //public async Task<IActionResult> DoctorSignUp(SignUpViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (!_logInService.ConfirmPassword(model))
+        //        {
+        //            ViewBag.error = "Confirmed password does not match";
+        //            return View();
+        //        }
 
-                bool checkSignUp = await _logInService.DoctorSignUp(model);
+        //        bool checkSignUp = await _logInService.DoctorSignUp(model);
 
-                if (checkSignUp)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ViewBag.error = "Email already exists";
-                    return View();
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("New Error", "Invalid Data");
-                return View();
-            }
-        }
+        //        if (checkSignUp)
+        //        {
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //        else
+        //        {
+        //            ViewBag.error = "Email already exists";
+        //            return View();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ModelState.AddModelError("New Error", "Invalid Data");
+        //        return View();
+        //    }
+        //}
 
         [AllowAnonymous, HttpGet("forgot-password")]
         public IActionResult ForgotPassword()
