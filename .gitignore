@@ -13,7 +13,6 @@
 /obj/Debug/net6.0/HospitalManagementSystem.assets.cache
 /obj/Debug/net6.0/HospitalManagementSystem.assets.cache
 /.gitignore
-/Areas/Admin
 /bin/Debug/net6.0/HospitalManagementSystem.dll
 /bin/Debug/net6.0/HospitalManagementSystem.pdb
 /bin/Debug/net6.0/HospitalManagementSystem.staticwebassets.runtime.json
