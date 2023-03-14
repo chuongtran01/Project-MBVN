@@ -218,10 +218,68 @@ namespace HospitalManagementSystem.Services
                 _context.Patients.AddAsync(newUser);
                 await _context.SaveChangesAsync();
                 _httpContextAccessor.HttpContext.Session.SetString("UID", newUser.PatientId.ToString());
+                _httpContextAccessor.HttpContext.Session.SetString("Role", "Patient");
                 return true;
             }
             return false;
         }
+
+        public async Task<bool> AdminSignUp(SignUpViewModel model)
+        {
+            if (!ConfirmPassword(model))
+            {
+                return false;
+            }
+
+            var check = _context.Admins.Where(admin => admin.Email == model.EmailAddress);
+
+            if (check != null)
+            {
+                return false;
+            }
+
+            Admin newAdmin = new Admin()
+            {
+                Email = model.EmailAddress,
+                Password = getEncryptedPassword(model.Password),
+            };
+
+            await _context.Admins.AddAsync(newAdmin);
+            await _context.SaveChangesAsync();
+            _httpContextAccessor.HttpContext.Session.SetString("UID", newAdmin.AdminId.ToString());
+            _httpContextAccessor.HttpContext.Session.SetString("Role", "Admin");
+
+            return true;
+        }
+
+        public async Task<bool> DoctorSignUp(SignUpViewModel model)
+        {
+            if (!ConfirmPassword(model))
+            {
+                return false;
+            }
+
+            var check = _context.Admins.Where(admin => admin.Email == model.EmailAddress);
+
+            if (check != null)
+            {
+                return false;
+            }
+
+            Doctor newDoctor = new Doctor()
+            {
+                EmailAddress = model.EmailAddress,
+                Password = getEncryptedPassword(model.Password),
+            };
+
+            await _context.Doctors.AddAsync(newDoctor);
+            await _context.SaveChangesAsync();
+            _httpContextAccessor.HttpContext.Session.SetString("UID", newDoctor.DoctorId.ToString());
+            _httpContextAccessor.HttpContext.Session.SetString("Role", "Doctor");
+
+            return true;
+        }
+
         public async Task<bool> editProfile(ManageProfileViewModel model)
         {
             var curUser = await _context.Patients.FindAsync(model.ID);
@@ -260,5 +318,7 @@ namespace HospitalManagementSystem.Services
             }
             return null;
         }
+
+        
     }
 }
