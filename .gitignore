@@ -4,26 +4,5 @@
 
 /.vs
 /HospitalManagementSystem.csproj.user
-/obj/Debug/net6.0/apphost.exe
-/obj/Debug/net6.0/HospitalManagementSystem.RazorAssemblyInfo.cs
-/obj/Debug/net6.0/HospitalManagementSystem.assets.cache
-/obj/Debug/net6.0/HospitalManagementSystem.csproj.AssemblyReference.cache
-/obj/Debug/net6.0/HospitalManagementSystem.GeneratedMSBuildEditorConfig.editorconfig
-/obj/Debug/net6.0/HospitalManagementSystem.RazorAssemblyInfo.cache
-/obj/Debug/net6.0/HospitalManagementSystem.assets.cache
-/obj/Debug/net6.0/HospitalManagementSystem.assets.cache
-/.gitignore
-/bin/Debug/net6.0/HospitalManagementSystem.dll
-/bin/Debug/net6.0/HospitalManagementSystem.pdb
-/bin/Debug/net6.0/HospitalManagementSystem.staticwebassets.runtime.json
-/obj/Debug/net6.0/HospitalManagementSystem.GeneratedMSBuildEditorConfig.editorconfig
-/obj/Debug/net6.0/HospitalManagementSystem.csproj.AssemblyReference.cache
-/obj/Debug/net6.0/HospitalManagementSystem.csproj.CoreCompileInputs.cache
-/obj/Debug/net6.0/HospitalManagementSystem.dll
-/obj/Debug/net6.0/HospitalManagementSystem.pdb
-/obj/Debug/net6.0/project.razor.vs.json
-/wwwroot/css
-/obj/Release/net6.0
-/obj/Debug/net6.0
 /obj
-/bin/Debug/net6.0
+/bin
