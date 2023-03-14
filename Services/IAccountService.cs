@@ -17,5 +17,7 @@ namespace HospitalManagementSystem.Services
         Task<bool> ResetPasswordAsync(ResetPasswordModel model);
         Task<bool> SendResetPasswordEmail(string email);
         Task<bool> SignUp(SignUpViewModel model);
+        Task<bool> AdminSignUp(SignUpViewModel model);
+        Task<bool> DoctorSignUp(SignUpViewModel model);
     }
 }

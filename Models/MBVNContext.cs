@@ -45,7 +45,7 @@ namespace HospitalManagementSystem.Models
             modelBuilder.Entity<Admin>(entity =>
             {
                 entity.Property(e => e.AdminId)
-                    .ValueGeneratedNever()
+                    //.ValueGeneratedNever()
                     .HasColumnName("AdminID");
 
                 entity.Property(e => e.Birthday).HasColumnType("date");
@@ -107,9 +107,9 @@ namespace HospitalManagementSystem.Models
 
             modelBuilder.Entity<ContactU>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
+                entity.Property(e => e.Id).HasColumnName("ID");
+                    //.ValueGeneratedNever()
+                    //.HasColumnName("ID");
 
                 entity.Property(e => e.Contactno)
                     .HasMaxLength(50)

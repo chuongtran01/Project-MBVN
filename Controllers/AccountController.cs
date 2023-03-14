@@ -35,11 +35,20 @@ namespace HospitalManagementSystem.Controllers
         private readonly MBVNContext _context;
         private readonly IAccountService _accountService;
 
+        //private readonly IManageProfile _manageProfile;
+
+
+
         public AccountController(IHttpContextAccessor httpContextAccessor, MBVNContext context, IAccountService accountService)
+
         {
             _httpContextAccessor = httpContextAccessor;
             _context = context;
             _accountService = accountService;
+
+            //_logInService = logInService;
+            //_manageProfile = manageProfile;
+
         }
         // GET: /<controller>/
         public IActionResult Index()
@@ -127,6 +136,7 @@ namespace HospitalManagementSystem.Controllers
             {
                 return RedirectToAction("Index", "Home", new { area = role });
             }
+
             return View();
         }
 
@@ -139,11 +149,13 @@ namespace HospitalManagementSystem.Controllers
                 //var encryptedPassword = GetMD5(model.Password);
                 //var user = _context.Patients.Where(s => s.EmailAddress.Equals(model.EmailAddress) && s.Password.Equals(encryptedPassword)).FirstOrDefault();
 
+
                 bool success = await _accountService.DoctorLogIn(model);
 
                 if (success == true)
                 {
                     //HttpContext.Session.SetString("UID", patientID);
+
                     return RedirectToAction("Index", "Home", new {area="Doctor"});
 
                 }
@@ -155,6 +167,7 @@ namespace HospitalManagementSystem.Controllers
             }
             return View();
         }
+
         public ActionResult Logout()
         {
             _accountService.LogOut();
@@ -195,8 +208,80 @@ namespace HospitalManagementSystem.Controllers
                 ModelState.AddModelError("New Error", "Invalid Data");
                 return View();
             }
-
         }
+
+        [HttpGet]
+        public IActionResult AdminSignUp()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> AdminSignUp(SignUpViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (!_logInService.ConfirmPassword(model))
+        //        {
+        //            ViewBag.error = "Confirmed password does not match";
+        //            return View();
+        //        }
+
+        //        bool checkSignUp = await _logInService.AdminSignUp(model);
+
+        //        if (checkSignUp)
+        //        {
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //        else
+        //        {
+        //            ViewBag.error = "Email already exists";
+        //            return View();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ModelState.AddModelError("New Error", "Invalid Data");
+        //        return View();
+        //    }
+        //}
+
+        [HttpGet]
+        public IActionResult DoctorSignUp()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> DoctorSignUp(SignUpViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (!_logInService.ConfirmPassword(model))
+        //        {
+        //            ViewBag.error = "Confirmed password does not match";
+        //            return View();
+        //        }
+
+        //        bool checkSignUp = await _logInService.DoctorSignUp(model);
+
+        //        if (checkSignUp)
+        //        {
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //        else
+        //        {
+        //            ViewBag.error = "Email already exists";
+        //            return View();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ModelState.AddModelError("New Error", "Invalid Data");
+        //        return View();
+        //    }
+        //}
+
         [AllowAnonymous, HttpGet("forgot-password")]
         public IActionResult ForgotPassword()
         {
@@ -250,9 +335,9 @@ namespace HospitalManagementSystem.Controllers
             ManageProfileViewModel user = new ManageProfileViewModel
             {
                 ID = curUser.PatientId,
-                FirstName = "Chuong",
+                FirstName = curUser.Firstname,
                 Email = curUser.EmailAddress,
-                Address = "266 dfdas",
+                Address = curUser.Address,
                 Gender = curUser.Gender,
             };
 
@@ -262,16 +347,87 @@ namespace HospitalManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> ManageProfile(ManageProfileViewModel model)
         {
-            var curUser = await _context.Patients.FindAsync(model.ID);
+            if (ModelState.IsValid)
+            {
+                Patient curUser = _context.Patients.Where(s => s.PatientId.Equals(model.ID)).FirstOrDefault();
 
-            curUser.Address = model.Address;
-            curUser.Gender = model.Gender;
-            curUser.LastVisited = DateTime.Now;
+                if (curUser != null)
+                {
+                    curUser.Firstname = model.FirstName;
+                    curUser.Address = model.Address;
+                    curUser.Gender = model.Gender;
+                    curUser.LastVisited = DateTime.Now;
 
-            await _context.SaveChangesAsync();
-            
+                    _context.Patients.Update(curUser);
+                    await _context.SaveChangesAsync();
 
-            return View(model);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.error = "User does not exist!";
+                    return View();
+                }
+            }
+            else
+            {
+                ViewBag.error = "Model is invalid!";
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ContactUs(ContactUsViewModelGuest model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    byte[] b = new byte[] { 10, 12, 12, 12 };
+                    DateTime t = DateTime.Now;
+                    Array.Copy(BitConverter.GetBytes(t.Ticks), 0, b, 0, 4);
+
+                    ContactU newMessage = new ContactU()
+                    {
+                        Fullname = model.Fullname,
+                        Contactno = model.Contactno,
+                        Email = model.Email,
+                        Message = model.Message,
+                        PostingDate = null,
+                        LastUpdation = DateTime.Now
+                    };
+
+                    await _context.ContactUs.AddAsync(newMessage);
+                    await _context.SaveChangesAsync();
+
+                    ViewBag.sender = model.Fullname;
+                    return RedirectToAction("SuccessfullySentMessage", "Account");
+
+                }
+                else
+                {
+                    ViewBag.error = "Something wrong happend. Please try again!";
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.error = ex.InnerException.Message;
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult SuccessfullySentMessage(string sender)
+        {
+            //ViewBag.sender = sender;
+            return View();
         }
     }
 }

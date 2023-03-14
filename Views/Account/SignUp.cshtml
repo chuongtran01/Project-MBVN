@@ -13,6 +13,12 @@
 <head>
     <title>User Registration</title>
 
+    <style>
+        .logo {
+            margin-top: 70px;
+        }
+    </style>
+
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 
 </head>
@@ -27,7 +33,6 @@
             @using (Html.BeginForm("SignUp", "Account", FormMethod.Post))
             {
                 <div class="box-register">
-                    @*<form name="registration" id="registration" method="post" onSubmit="return valid();">*@
                     <fieldset>
                         <legend>
                             Sign Up
@@ -54,67 +59,14 @@
                                 <label style="color:red;"> @ViewBag.error</label>
                             }
                         </div>
-                        @*<div class="form-group">
-            <input type="text" class="form-control" name="city" placeholder="City" required>
-        </div>
-        <div class="form-group">
-            <label class="block">
-                Gender
-            </label>
-            <div class="clip-radio radio-primary">
-                <input type="radio" id="rg-female" name="gender" value="female">
-                <label for="rg-female">
-                    Female
-                </label>
-                <input type="radio" id="rg-male" name="gender" value="male">
-                <label for="rg-male">
-                    Male
-                </label>
-            </div>
-        </div>*@
-                        @*<p>
-            Enter your account details below:
-        </p>
-        <div class="form-group">
-            <span class="input-icon">
-                <input type="email" class="form-control" name="email" id="email" onBlur="userAvailability()" placeholder="Email" required>
-                <i class="fa fa-envelope"></i>
-            </span>
-            <span id="user-availability-status1" style="font-size:12px;"></span>
-        </div>
-        <div class="form-group">
-            <span class="input-icon">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                <i class="fa fa-lock"></i>
-            </span>
-        </div>
-        <div class="form-group">
-            <span class="input-icon">
-                <input type="password" class="form-control" id="password_again" name="password_again" placeholder="Password Again" required>
-                <i class="fa fa-lock"></i>
-            </span>
-        </div>
-        <div class="form-group">
-            <div class="checkbox clip-check check-primary">
-                <input type="checkbox" id="agree" value="agree" checked="true" readonly=" true">
-                <label for="agree">
-                    I agree
-                </label>
-            </div>
-        </div>*@
+                        
+                        
                         <div class="form-actions">
-                            @*<p>
-                Already have an account?
-                <a asp-area="" asp-controller="Account" asp-action="Login">
-                    Log-in
-                </a>
-            </p>*@
                             <button type="submit" class="btn btn-primary pull-right" id="submit" name="submit">
                                 Submit <i class="fa fa-arrow-circle-right"></i>
                             </button>
                         </div>
                     </fieldset>
-                    @*</form>*@
 
                     <div class="copyright">
                         &copy; <span class="current-year"></span><span class="text-bold text-uppercase"> HMS</span>. <span>All rights reserved</span>

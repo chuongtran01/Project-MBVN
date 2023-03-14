@@ -24,6 +24,7 @@ namespace HospitalManagementSystem.Areas.Admin.Controllers
 		{
 			return View();
 		}
+		
 	}
 }
 

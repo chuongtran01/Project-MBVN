@@ -1,0 +1,71 @@
+﻿@model EditPatientViewModel
+
+<h4>Department</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <div>@ViewBag.error</div>
+        @using (Html.BeginForm("EditPatient", "Patient", FormMethod.Post))
+        {
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="PatientId" />
+            <input type="hidden" asp-for="EmailAddress" />
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                @Html.TextBoxFor(temp => temp.FirstName, new { placeholder = "First Name", @class = "form-control" })
+                @Html.ValidationMessageFor(temp => temp.FirstName, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                @Html.TextBoxFor(temp => temp.LastName, new { placeholder = "Last Name", @class = "form-control" })
+                @Html.ValidationMessageFor(temp => temp.LastName, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                @Html.PasswordFor(temp => temp.Password, new { placeholder = "Password", @class = "form-control" })
+                @Html.ValidationMessageFor(temp => temp.LastName, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmedPassword" class="control-label"></label>
+                @Html.PasswordFor(temp => temp.ConfirmedPassword, new { placeholder = "Confirm Password", @class = "form-control" })
+                @Html.ValidationMessageFor(temp => temp.ConfirmedPassword, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label asp-for="Birthday" class="control-label"></label>
+                @Html.EditorFor(temp => temp.Birthday, new { placeholder = "DOB", @class = "form-control" })
+                @Html.ValidationMessageFor(temp => temp.Birthday, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(temp => temp.Gender, new { @class = "control-label" })
+                @Html.DropDownListFor(s => s.Gender, new SelectList(Enum.GetValues(typeof(Gender))), new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                @Html.TextAreaFor(temp => temp.Address, new { placeholder = "Location", @class = "form-control" })
+                @Html.ValidationMessageFor(temp => temp.Address, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                @Html.TextBoxFor(temp => temp.PhoneNumber, new { placeholder = "Phone Number", @class = "form-control" })
+                @Html.ValidationMessageFor(temp => temp.PhoneNumber, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label asp-for="EmergencyContact" class="control-label"></label>
+                @Html.TextBoxFor(temp => temp.EmergencyContact, new { placeholder = "Emergency Contact", @class = "form-control" })
+                @Html.ValidationMessageFor(temp => temp.EmergencyContact, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Department">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

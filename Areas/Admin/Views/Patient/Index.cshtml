@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Patient>
+
+@{
+    ViewBag.Title = "Admin | Patient List";
+    @*Layout = "~/Views/Shared/_Layout.cshtml";*@
+}
+
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+
+<body>
+    <div>
+        <div class="app-content">
+            <!-- end: TOP NAVBAR -->
+            <div class="main-content">
+                <div class="wrap-content container" id="container">
+                    <!-- start: PAGE TITLE -->
+                    <section id="page-title">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h1 class="mainTitle">Admin | Manage Patients</h1>
+                            </div>
+                        </div>
+                        <form asp-action="Index" asp-controller="Patient" class="search-bar">
+                            <div class="input-group md-form form-sm form-2 pl-0">
+                                <input name="childname" class="form-control my-0 py-1 red-border" type="text" placeholder="Search" aria-label="Search" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text red lighten-3" id="basic-text1">
+                                        <i class="bi bi-search text-grey" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                        
+                            
+                        
+                    </section>
+                    <a asp-area="Admin" asp-controller="Patient" asp-action="AddPatient" class="btn btn-primary">ADD</a>
+                    <div class="container-fluid container-fullw bg-white">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p style="color:red;">
+                                </p>
+                                <table class="table table-hover" id="sample-table-1">
+                                    <thead>
+                                        <tr>
+                                            <th class="center">#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Gender</th>
+                                            <th>Email Address</th>
+                                            <th>Phone Number</th>
+                                            <th>DOB</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @if (Model != null)
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@item.PatientId</td>
+                                                    <td>@item.Firstname</td>
+                                                    <td>@item.Lastname</td>
+                                                    <td>@item.Gender</td>
+                                                    <td>@item.EmailAddress</td>
+                                                    <td>@item.PhoneNumber</td>
+                                                    <td>@item.Birthday</td>
+                                                    <td>
+                                                        <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                                            <a asp-action="EditPatient" asp-route-id="@item.PatientId" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
+                                                            @*<button type="submit" onClick="return confirm('Are you sure you want to delete?')" class="btn btn-transparent btn-xs"><i class="fa fa-times fa fa-white"></i></button>*@
+                                                            @*@Html.ActionLink("Delete", "Delete", "Department", new {id = @item.DepartmentId}, null)*@
+                                                            @using (Html.BeginForm("Delete", "Patient", FormMethod.Post))
+                                                            {
+                                                                @*<form asp-action="Delete" asp-route-id="@item.DepartmentId">*@
+                                                                <input type="hidden" name="Id" value=@item.PatientId />
+                                                                @*<input type="submit" value="Delete"/>*@
+                                                                <button type="submit" onClick="return confirm('Are you sure you want to delete?')" class="btn btn-transparent btn-xs"><i class="fa fa-times fa fa-white"></i></button>
+
+                                                            }
+                                                            @*</form>*@
+                                                        </div>
+                                                        <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                            <div class="btn-group" dropdown is-open="status.isopen">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+@*<script type="text/javascript">
+        function setDeletedId(deletedId) {
+            var hidden = document.getElementById("Id");
+            hidden.value = deletedId;
+        }
+    </script>*@
+@section scripts{
+    <script>
+        $(function () {
+            $("#basic-text1").click(function () {
+                $(".search-bar").submit();
+            })
+        })
+    </script>
+}
